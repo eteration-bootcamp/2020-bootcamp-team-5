@@ -1,2 +1,3 @@
-import Form from "./js/components/Form";
+import App from "./App";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
