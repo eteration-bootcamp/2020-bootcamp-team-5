@@ -29,9 +29,6 @@ public class User {
 	@Email
 	private String mail;
 	
-	@Column(nullable = false)
-	private int userInfoId;
-	
 	public User() {
 		super();
 	}
@@ -75,14 +72,4 @@ public class User {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
-	public int getUserInfoId() {
-		return userInfoId;
-	}
-
-	public void setUserInfoId(int userInfoId) {
-		this.userInfoId = userInfoId;
-	}
-
-	
 }

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.team5.Noteapp.Entity.Permission;
-import com.team5.Noteapp.Entity.User;
+import com.team5.Noteapp.Entity.UserInfo;
 import com.team5.Noteapp.Repository.PermissionRepository;
-import com.team5.Noteapp.Repository.UserRepository;
+import com.team5.Noteapp.Repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class NoteService {
 	private PermissionRepository permissionRepository;
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserInfoRepository userInfoRepository;
 	
 	public List<Note> getAllNotes() {
 		List <Note> notes = new ArrayList<Note>();
@@ -49,12 +49,12 @@ public class NoteService {
 		noteRepository.deleteById(id);
 	}
 
-	public void shareNote(int noteId, int userId, int role){
-		Optional<User> userOptional = userRepository.findById(userId);
-		if (userOptional.isPresent()){
+	public void shareNote(int noteId, String userId, int role){
+		Optional<UserInfo> userInfoOptional = userInfoRepository.findByUsername(userId);
+		if (userInfoOptional.isPresent()){
 			Permission permission = new Permission();
 			permission.setNoteId(noteId);
-			permission.setUserId(userId);
+			permission.setUserId(userInfoOptional.get().getId());
 			if (role == 0){
 				permission.setRole("read");
 				permissionRepository.save(permission);
@@ -66,7 +66,7 @@ public class NoteService {
 			else if (role == 2){
 				Permission permission2 = new Permission();
 				permission2.setNoteId(noteId);
-				permission2.setUserId(userId);
+				permission2.setUserId(userInfoOptional.get().getId());
 				permission2.setRole("read");
 				permissionRepository.save(permission2);
 				permission.setRole("write");

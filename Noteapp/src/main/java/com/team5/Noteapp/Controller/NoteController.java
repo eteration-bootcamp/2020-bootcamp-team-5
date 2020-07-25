@@ -45,8 +45,8 @@ public class NoteController {
 	}
 
 	@AddPermissionFilter(permissions =  {"owner"})
-	@PostMapping("/share/{noteId}/{userId}/{role}")
-	public void shareNote(@PathVariable int noteId, @PathVariable int userId, @PathVariable int role) {
-		noteService.shareNote(noteId, userId, role);
+	@PostMapping("/share/{id}/{userName}/{role}")
+	public void shareNote(@PathVariable int id, @PathVariable String userName, @PathVariable int role) {
+		noteService.shareNote(id, userName, role);
 	}
 }
