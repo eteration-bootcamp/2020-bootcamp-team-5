@@ -14,9 +14,6 @@ public class Note {
 	private int id;
     
     @Column(nullable = false)
-    private int userId;
-    
-    @Column(nullable = false)
 	private String title;
     
     @Column(nullable = false)
@@ -26,10 +23,9 @@ public class Note {
     	
     }
 
-	public Note(int id, int userId, String title, String content) {
+	public Note(int id, String title, String content) {
 		super();
 		this.id = id;
-		this.userId = userId;
 		this.title = title;
 		this.content = content;
 	}
@@ -40,14 +36,6 @@ public class Note {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public String getTitle() {

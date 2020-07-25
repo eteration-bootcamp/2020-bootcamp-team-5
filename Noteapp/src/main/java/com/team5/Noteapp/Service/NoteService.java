@@ -26,9 +26,21 @@ public class NoteService {
 	@Autowired
 	private UserInfoRepository userInfoRepository;
 	
-	public List<Note> getAllNotes() {
+	public List<Note> getAllNotes(Integer userId) {
 		List <Note> notes = new ArrayList<Note>();
-		noteRepository.findAll().forEach(comingWithForEach -> notes.add(comingWithForEach));
+		
+		permissionRepository.findAll().forEach(permission -> {
+			
+			System.out.println(permission.getRole() + " - " + permission.getUserId() + " - " + userId.toString());
+			
+			if(permission.getRole().equals("read") && permission.getUserId() == userId) {
+				Optional <Note> note = noteRepository.findById(permission.getNoteId());
+				
+				if (note.isPresent()) 
+					notes.add(note.get());	
+			}
+		});
+		
 		return notes;
 	}
 	
@@ -36,8 +48,26 @@ public class NoteService {
 		return noteRepository.findById(id).get();
 	}
 
-	public void addNote(Note note) {
+	public void addNote(Note note, int userId) {
 		noteRepository.save(note);
+		
+		Permission permission = new Permission();
+		permission.setNoteId(note.getId());
+		permission.setUserId(userId);
+		permission.setRole("read");
+		permissionRepository.save(permission);
+		
+		Permission permission2 = new Permission();
+		permission2.setNoteId(note.getId());
+		permission2.setUserId(userId);
+		permission2.setRole("write");
+		permissionRepository.save(permission2);
+		
+		Permission permission3 = new Permission();
+		permission3.setNoteId(note.getId());
+		permission3.setUserId(userId);
+		permission3.setRole("owner");
+		permissionRepository.save(permission3);
 	}
 
 	public void editNote(Note note,int id) {
