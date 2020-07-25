@@ -1,4 +1,4 @@
-package com.team5.Noteapp.HashCode;
+package com.team5.Noteapp.Service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.hash.Hashing;
-import com.team5.Noteapp.User.User;
+import com.team5.Noteapp.Entity.HashCode;
+import com.team5.Noteapp.Entity.User;
+import com.team5.Noteapp.Repository.HashCodeRepository;
 
 @Service
 public class HashCodeService {

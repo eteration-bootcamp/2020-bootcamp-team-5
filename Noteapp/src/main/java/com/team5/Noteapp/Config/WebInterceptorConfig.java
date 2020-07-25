@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.team5.Noteapp.Util.AuthenticationInterceptor;
+import com.team5.Noteapp.Util.AuthInterceptor;
 
 @Configuration
 public class WebInterceptorConfig implements WebMvcConfigurer {
@@ -17,12 +17,14 @@ public class WebInterceptorConfig implements WebMvcConfigurer {
 	static {
 		excludePathPatterns = new ArrayList<String>();
 		excludePathPatterns.add("/login");
+		excludePathPatterns.add("/register");
+		excludePathPatterns.add("/create");
 	}
 	
 	
 	@Bean
-	public AuthenticationInterceptor authenticationInterceptor() {
-		return new AuthenticationInterceptor();
+	public AuthInterceptor authenticationInterceptor() {
+		return new AuthInterceptor();
 	}
 	
 	@Override

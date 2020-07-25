@@ -1,16 +1,17 @@
-package com.team5.Noteapp.HashCode;
+package com.team5.Noteapp.Entity;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class HashCode {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private int userId;
@@ -19,6 +20,8 @@ public class HashCode {
 	
 	private Date exDate;
 
+	private String type;
+	
 	public HashCode() {
 		super();
 	}
@@ -53,5 +56,13 @@ public class HashCode {
 
 	public void setExDate(Date exDate) {
 		this.exDate = exDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

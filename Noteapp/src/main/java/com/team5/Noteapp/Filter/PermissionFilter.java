@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team5.Noteapp.Permission.Permission;
-import com.team5.Noteapp.Permission.PermissionService;
+import com.team5.Noteapp.Entity.Permission;
+import com.team5.Noteapp.Service.PermissionService;
 
 @Service
 public class PermissionFilter {

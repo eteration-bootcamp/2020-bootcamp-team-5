@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Mail {
+public class MailService {
 	private static Properties properties;
 	private static Session session;
 	private static final String username="noteration@gmail.com";

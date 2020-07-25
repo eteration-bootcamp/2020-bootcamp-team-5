@@ -1,8 +1,9 @@
-package com.team5.Noteapp.User;
+package com.team5.Noteapp.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.team5.Noteapp.Validator.Email;
@@ -12,7 +13,7 @@ import com.team5.Noteapp.Validator.PhoneNumber;
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(nullable = false)

@@ -1,9 +1,12 @@
-package com.team5.Noteapp.Note;
+package com.team5.Noteapp.Service;
 
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.team5.Noteapp.Entity.Note;
+import com.team5.Noteapp.Repository.NoteRepository;
 
 @Service
 public class NoteService {

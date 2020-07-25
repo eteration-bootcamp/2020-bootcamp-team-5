@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.team5</groupId>
-	<artifactId>Noteapp</artifactId>
+	<artifactId>Noteration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Noteapp</name>
-	<description>Bootcamp Project</description>
+	<name>Noteration</name>
+	<description>Bootcamp 2020</description>
 
 	<properties>
 		<java.version>1.8</java.version>
