@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {Form, FormControl, Button, Navbar, Nav} from 'react-bootstrap';
+import React from 'react';
+import { useHistory } from "react-router-dom";
+import {Form, Button, Navbar, Nav} from 'react-bootstrap';
 
 const Navigation = () => {
+
+  const history = useHistory();
+
+  const routeLogin = () =>{ 
+    let path = '/login'; 
+    history.push(path);
+  }
+
   return (
     <>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Noteration</Navbar.Brand>
+            <Navbar.Brand href="/">Noteration</Navbar.Brand>
             <Nav className="mr-auto">
-            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             </Nav>
             <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
+            <Button variant="outline-info" onClick={routeLogin}>Login</Button>
             </Form>
         </Navbar>
     </>
