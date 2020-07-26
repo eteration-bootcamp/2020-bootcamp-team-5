@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { useHistory } from "react-router-dom";
 import {Jumbotron, Button} from 'react-bootstrap';
 import Navigation from './Navigation';
+import Note from './Note';
 
 const Home = () => {
 
@@ -14,6 +15,8 @@ const Home = () => {
                 <Button variant="primary">Add Note</Button>
                 </p>
             </Jumbotron>
+
+            <Note/>
         </Fragment>
     )
 };
