@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Constraint(validatedBy = EmailValidator.class)
 public @interface Email {
-	String message() default "Invalid phone number";
+	String message() default "Invalid email address";
 	Class<?> [] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }
