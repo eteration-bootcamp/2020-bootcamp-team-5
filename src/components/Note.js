@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { useHistory } from "react-router-dom";
-import NoteGrid from './NoteGrid';
+import SideMenu, {Item} from 'react-sidemenu';
 
 class Note extends Component {
     constructor(props) {
@@ -37,13 +37,27 @@ class Note extends Component {
     
     render() {
         return (
-            <div>
+            <Fragment>
                 <form onSubmit={this.addNote}>
                     <input type="text" placeholder="Enter New Note" ref="newNote" />
                     <button type="submit">Add</button>
                 </form>
-                <NoteGrid entries={this.state.notes} removeNote={this.deleteNote} />
-            </div>
+                    
+                {this.state.notes.map((note, i) => {
+                    return (
+                        <SideMenu>
+                            <Item divider={true} label="My Notes" value="segment1"/>
+                                
+                            <Item label={note} icon="fa-search">
+                                <Item label="Item 1.1" value="item1.1" icon="fa-snapchat">
+                                </Item>
+                            </Item>
+                                
+                        </SideMenu>
+                    );
+                })}
+                
+            </Fragment>
         );
     }
 };
