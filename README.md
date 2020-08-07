@@ -1,14 +1,9 @@
-# 2020 Bootcamp Team 5 - `<team-name>`
+# Code Smell and Design Pattern Implementations
 
-## Team Members
+## Description
+This work includes implementations below:
 
-| Role               | Name      |
-|--------------------|-----------|
-| Frontend Developer | John Doe  |
-| Backend Developer  | Jane Doe  |
-
-## Project
-
-.
-.
-.
+* Code Smell | ChangePreventers
+* Code Smell | Duplicated Code
+* Design Pattern | Adapter
+* Design Pattern | Factory
