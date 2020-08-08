@@ -7,3 +7,4 @@ This work includes implementations below:
 * Code Smell | Duplicated Code
 * Design Pattern | Adapter
 * Design Pattern | Factory
+* Design Pattern | Prototype
