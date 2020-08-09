@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { createStore } from 'redux';
+import reducer from './reducers';
+import { Provider } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import WelcomePage from './containers/WelcomePage';
 
 import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Signup';
 import Profile from './components/Profile';
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const App = () => {
   return (
-    <div className="row">
-      <div className="container-fluid center-content">
+      /*<div className="row">
+      <div className="container-fluid center-content">*/
         <Router>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
+          <Route path="/" exact component={WelcomePage} />
           <Route path="/profile" exact component={Profile} />
         </Router>
-      </div>
-    </div>
+       /*</div>
+      </div>*/
   );
 };
 
@@ -26,4 +33,4 @@ const App = () => {
 export default App;
 
 const wrapper = document.getElementById("app");
-wrapper ? ReactDOM.render(<App />, wrapper) : false;
+wrapper ? ReactDOM.render(<Provider store={store}><App /></Provider>, wrapper) : false;
