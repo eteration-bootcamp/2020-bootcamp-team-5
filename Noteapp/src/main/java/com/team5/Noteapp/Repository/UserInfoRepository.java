@@ -12,4 +12,7 @@ import com.team5.Noteapp.Entity.UserInfo;
 public interface UserInfoRepository extends CrudRepository<UserInfo, Integer> {
 	@Query("SELECT UserInfo FROM UserInfo AS UserInfo WHERE username = ?1")
 	Optional<UserInfo> findByUsername(String username);
+
+	@Query("SELECT UserInfo FROM UserInfo AS UserInfo WHERE username = ?1 and password = ?2")
+	Optional<UserInfo> findByUsernameAndPassword(String username, String pass);
 }

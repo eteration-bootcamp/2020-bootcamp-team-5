@@ -15,4 +15,5 @@ public interface HashCodeRepository extends CrudRepository<HashCode, Integer>{
 	
 	@Query("DELETE FROM HashCode AS HasHCode WHERE userId = ?1")
 	void deleteHashCode(int userId);
+
 }

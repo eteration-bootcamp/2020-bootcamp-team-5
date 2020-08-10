@@ -19,6 +19,8 @@ public class UserInfo {
 	
 	private String password;
 
+	private boolean isActive;
+
 	public UserInfo() {
 		super();
 	}
@@ -53,5 +55,13 @@ public class UserInfo {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 }

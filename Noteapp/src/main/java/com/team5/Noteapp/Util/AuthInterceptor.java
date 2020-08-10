@@ -41,17 +41,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			response.setStatus(401);
 			return false;
 		}
-
 		
     	if(System.currentTimeMillis() > hashCodeOptional.get().getExDate().getTime()){
 			response.setStatus(401);
 			return false;
 		}
     	
-    	
     	User user = userService.getUserById(hashCodeOptional.get().getUserId());
     	request.setAttribute("user", user);
-    
     	
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Method method = handlerMethod.getMethod();
@@ -64,8 +61,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 					return false;
 				}
 		}
-		
-		
 		return true;
     }
 
