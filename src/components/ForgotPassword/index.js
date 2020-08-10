@@ -19,8 +19,8 @@ function ForgotPassword() {
                 </Button>
             </Form>
 
-            <Form.Text className="text-muted form-login-forgot-password">
-                <Button variant="secondary" className="button-reset" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>← Go Back</Button>
+            <Form.Text className="text-muted">
+                <Button variant="secondary" className="forgot-password-text go-back-button" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>← Go Back</Button>
             </Form.Text>
         </div>
     );

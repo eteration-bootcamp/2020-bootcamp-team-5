@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { useHistory } from "react-router-dom";
 import SideMenu, {Item} from 'react-sidemenu';
 
-class Note extends Component {
+class AddNewNotePage extends Component {
     constructor(props) {
         super(props);
 
@@ -62,4 +62,4 @@ class Note extends Component {
     }
 };
   
-export default Note;
+export default AddNewNotePage;

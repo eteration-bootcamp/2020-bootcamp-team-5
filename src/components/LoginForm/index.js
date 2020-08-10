@@ -11,14 +11,14 @@ function LoginForm() {
     const history = useHistory();
 
     const routeChange = () =>{ 
-      let path = '/profile'; 
+      let path = '/notes'; 
       history.push(path);
     }
 
     return(
         <Form inline className="login-form text-center">
             <Row className="login-form-row">
-                <Col xs={12} md={5} className="responsive-margin">
+                <Col xs={12} md={5} className="username-responsive">
                     <InputGroup>
                         <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1"><Person/></InputGroup.Text>
@@ -32,7 +32,7 @@ function LoginForm() {
                     </InputGroup>
                 </Col>
 
-                <Col xs={12} md={5} className="login-responsive">
+                <Col xs={12} md={5}>
                     <InputGroup>
                     <InputGroup.Prepend>
                         <InputGroup.Text id="basic-addon1"><Lock/></InputGroup.Text>
@@ -48,12 +48,12 @@ function LoginForm() {
                     <Row className="w-100"></Row>
 
                     <Form.Text>
-                        <Button variant="secondary" className="button-reset" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>Forgot password?</Button>
+                        <Button variant="secondary" className="forgot-password-text" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>Forgot password?</Button>
                     </Form.Text>
                 </InputGroup>
                 </Col>
 
-                <Col xs={12} md={2} className="login-responsive button-responsive">
+                <Col xs={12} md={2} className="login-responsive">
                     <Button variant="dark" type="submit" onClick={routeChange}>Login</Button>
                 </Col>
             </Row>

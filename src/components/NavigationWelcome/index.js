@@ -13,13 +13,13 @@ function NavigationWelcome() {
 
                     <Col xs={12} md={6} lg={3} xl={4} className="logo-responsive">
                         <Navbar.Brand href="/">
-                                <img
-                                    src={logo}
-                                    width="200"
-                                    height="100"
-                                    className="d-inline-block align-top"
-                                    alt="Noteration"
-                                />
+                            <img
+                                src={logo}
+                                width="200"
+                                height="100"
+                                className="d-inline-block align-top"
+                                alt="Noteration"
+                            />
                         </Navbar.Brand>
                     </Col>
 

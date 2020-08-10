@@ -12,7 +12,7 @@ function WelcomePage() {
   return (
     <Container fluid className="d-flex flex-column main-container">
         <Row>
-          <Col className="reset-pad">
+          <Col className="reset-padding">
             <NavigationWelcome/>
           </Col>
         </Row>
@@ -22,7 +22,6 @@ function WelcomePage() {
 
           <Col xs={12} md={6} lg={4} className="slogan-container">
             <Row className="justify-content-center">
-              {/* <Image src={logo} className="rotate-center" /> */}
               <h1>Noteration</h1>
             </Row>
             <Row>{<br/>}</Row>

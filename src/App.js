@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStore } from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import WelcomePage from './containers/WelcomePage';
-
-import Home from './components/Home';
-import Profile from './components/Profile';
+import NotesPage from './containers/NotesPage';
+import AddNewNotePage from './containers/AddNewNotePage';
 
 const store = createStore(
   reducer,
@@ -18,14 +17,13 @@ const store = createStore(
 
 const App = () => {
   return (
-      /*<div className="row">
-      <div className="container-fluid center-content">*/
         <Router>
-          <Route path="/" exact component={WelcomePage} />
-          <Route path="/profile" exact component={Profile} />
+          <Switch>
+            <Route exact path="/" component={WelcomePage} />
+            <Route exact path="/notes" component={NotesPage} />
+            <Route exact path="/notes/add" component={AddNewNotePage} />
+          </Switch>
         </Router>
-       /*</div>
-      </div>*/
   );
 };
 
