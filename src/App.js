@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import WelcomePage from './containers/WelcomePage';
 import NotesPage from './containers/NotesPage';
-import AddNewNotePage from './containers/AddNewNotePage';
 
 const store = createStore(
   reducer,

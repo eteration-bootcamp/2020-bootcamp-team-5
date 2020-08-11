@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Modal, Form, Col} from 'react-bootstrap';
 
-function AddNoteModal(props) {
+function AddNewNote(props) {
     return (
       <Modal
         {...props}
@@ -37,4 +37,4 @@ function AddNoteModal(props) {
     );
   }
   
-export default AddNoteModal;
+export default AddNewNote;

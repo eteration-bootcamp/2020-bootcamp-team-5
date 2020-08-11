@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col, Button} from 'react-bootstrap';
 import Navigation from '../components/Navigation';
 import Note from '../components/Note';
-import AddNoteModal from './AddNewNotePage';
+import AddNewNote from '../components/AddNewNote';
 
 function NotesPage() {
     const [modalShow, setModalShow] = React.useState(false);
@@ -25,7 +25,7 @@ function NotesPage() {
                     <Button variant="warning" onClick={() => setModalShow(true)}>Click here to add new note</Button>
                 </Col>
 
-                <AddNoteModal
+                <AddNewNote
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                 />
