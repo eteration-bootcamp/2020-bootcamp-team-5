@@ -5,11 +5,13 @@ import {PencilSquare, ZoomIn, Trash, Share} from 'react-bootstrap-icons';
 import EditNote from '../EditNote';
 import DeleteNote from '../DeleteNote';
 import ShareNote from '../ShareNote';
+import ViewNote from '../ViewNote';
 
 function Note() {
     const [modalShow, setModalShow] = useState(false);
     const [alertShow, setAlertShow] = useState(false);
     const [shareShow, setShareShow] = useState(false);
+    const [viewShow, setViewShow] = useState(false);
 
     return (
         <Col xs={12} sm={6} md={4} lg={4} xl={4} className="note-item-col ver-hor-center">
@@ -19,7 +21,11 @@ function Note() {
                     <Card.Text>
                         With supporting text below as a natural lead-in to additional cont.
                     </Card.Text>
-                    <Button variant="primary"><ZoomIn/></Button> {' '}
+                    <Button variant="primary" onClick={() => setViewShow(true)}><ZoomIn/></Button> {' '}
+                    <ViewNote
+                        show={viewShow}
+                        onHide={() => setViewShow(false)}
+                    />
                     <Button variant="warning" onClick={() => setModalShow(true)}><PencilSquare/></Button> {' '}
                     <EditNote
                         show={modalShow}
