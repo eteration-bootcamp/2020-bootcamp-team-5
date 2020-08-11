@@ -4,10 +4,12 @@ import {Col, Card, Button} from 'react-bootstrap';
 import {PencilSquare, ZoomIn, Trash, Share} from 'react-bootstrap-icons';
 import EditNote from '../EditNote';
 import DeleteNote from '../DeleteNote';
+import ShareNote from '../ShareNote';
 
 function Note() {
     const [modalShow, setModalShow] = useState(false);
     const [alertShow, setAlertShow] = useState(false);
+    const [shareShow, setShareShow] = useState(false);
 
     return (
         <Col xs={12} sm={6} md={4} lg={4} xl={4} className="note-item-col ver-hor-center">
@@ -28,7 +30,11 @@ function Note() {
                         show={alertShow}
                         onHide={() => setAlertShow(false)}
                     />
-                    <Button variant="info"><Share/></Button>
+                    <Button variant="info" onClick={() => setShareShow(true)}><Share/></Button>
+                    <ShareNote
+                        show={shareShow}
+                        onHide={() => setShareShow(false)}
+                    />
                 </Card.Body>
             </Card>
         </Col>
