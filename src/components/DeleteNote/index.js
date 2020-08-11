@@ -13,19 +13,14 @@ function DeleteNote(props) {
             <Alert
                 {...props}
                 variant="danger">
-                    
-                <Alert.Heading>Your note is being deleted! 
+                <Alert.Heading> 
                     <Spinner animation="border" role="status">
                         <span className="sr-only"></span>
                     </Spinner>
+                    Deleting your note... 
                 </Alert.Heading>
-                <p>
-                    #NoteTitle
-                    #NoteText
-                </p>
-
-                <Button variant="light" onClick={props.onHide}>Close</Button>
             </Alert>
+            <Button variant="light" onClick={props.onHide}>Close</Button>
         </Modal>
       );
 
