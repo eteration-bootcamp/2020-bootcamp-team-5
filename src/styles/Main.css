@@ -126,6 +126,10 @@ body {
     border-radius: 10px;
 }
 
+.modal-header {
+    color: black;
+}
+
 @media only screen and (max-width: 768px) { 
     .logo-responsive {
         display: grid;

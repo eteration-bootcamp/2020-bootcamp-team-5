@@ -1,65 +1,40 @@
-import React, {Component, Fragment} from 'react';
-import { useHistory } from "react-router-dom";
-import SideMenu, {Item} from 'react-sidemenu';
+import React from 'react';
+import {Button, Modal, Form, Col} from 'react-bootstrap';
 
-class AddNewNotePage extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-          notes: []
-        };
-
-        this.addNote = this.addNote.bind(this);
-        this.deleteNote = this.deleteNote.bind(this);
-      }
-    
-    addNote(event) {
-        event.preventDefault();
-
-        var noteArr = this.state.notes;
-        var newNote = this.refs.newNote.value;
-        noteArr.push(newNote);
-
-        this.setState({ notes: noteArr });
-        this.refs.newNote.value = "";
-    }
-    
-    deleteNote(name, i) {
-        var notes = this.state.notes.slice();
-        
-        notes.splice(i, 1);
-        
-        this.setState({
-            notes
-        });
-    }
-    
-    render() {
-        return (
-            <Fragment>
-                <form onSubmit={this.addNote}>
-                    <input type="text" placeholder="Enter New Note" ref="newNote" />
-                    <button type="submit">Add</button>
-                </form>
-                    
-                {this.state.notes.map((note, i) => {
-                    return (
-                        <SideMenu>
-                            <Item divider={true} label="My Notes" value="segment1"/>
-                                
-                            <Item label={note} icon="fa-search">
-                                <Item label="Item 1.1" value="item1.1" icon="fa-snapchat">
-                                </Item>
-                            </Item>
-                                
-                        </SideMenu>
-                    );
-                })}
-                
-            </Fragment>
-        );
-    }
-};
+function AddNoteModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a new note!
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form.Group>
+                <Form.Row>
+                    <Col>
+                    <Form.Control type="text" placeholder="Note title" />
+                    </Col>
+                </Form.Row>
+                <br />
+                <Form.Row>
+                    <Col>
+                    <Form.Control componentClass="textarea" rows={100} style={{ height: 200 }}  size="sm" type="text" placeholder="Edit your note" />
+                    </Col>
+                </Form.Row>
+            </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+            <Button onClick={props.onHide}>Submit</Button>
+            <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
   
-export default AddNewNotePage;
+export default AddNoteModal;
