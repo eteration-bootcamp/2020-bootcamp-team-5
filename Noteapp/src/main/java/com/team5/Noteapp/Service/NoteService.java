@@ -28,19 +28,14 @@ public class NoteService {
 	
 	public List<Note> getAllNotes(Integer userId) {
 		List <Note> notes = new ArrayList<Note>();
-		
 		permissionRepository.findAll().forEach(permission -> {
-			
 			System.out.println(permission.getRole() + " - " + permission.getUserId() + " - " + userId.toString());
-			
 			if(permission.getRole().equals("read") && permission.getUserId() == userId) {
 				Optional <Note> note = noteRepository.findById(permission.getNoteId());
-				
 				if (note.isPresent()) 
 					notes.add(note.get());	
 			}
 		});
-		
 		return notes;
 	}
 	
@@ -50,7 +45,6 @@ public class NoteService {
 
 	public void addNote(Note note, int userId) {
 		noteRepository.save(note);
-		
 		Permission permission = new Permission();
 		permission.setNoteId(note.getId());
 		permission.setUserId(userId);

@@ -1,17 +1,15 @@
 package com.team5.Noteapp.Service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.Optional;
-
-import jdk.nashorn.internal.objects.NativeMap;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.common.hash.Hashing;
 import com.team5.Noteapp.Entity.HashCode;
 import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Repository.HashCodeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class HashCodeService {

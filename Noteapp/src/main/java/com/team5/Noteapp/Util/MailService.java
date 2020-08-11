@@ -40,10 +40,8 @@ public class MailService {
             message.setSubject(subject);
             message.setContent(emailBody, "text/html; charset=utf-8");
             Transport.send(message);
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-		
 	}
 }
