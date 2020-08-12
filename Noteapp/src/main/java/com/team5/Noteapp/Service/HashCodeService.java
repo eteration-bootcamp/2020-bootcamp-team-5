@@ -19,8 +19,6 @@ public class HashCodeService {
 
     public HashCode createLoginHash(User user) {
         hashCodeRepository.deleteHashCode(user.getId());
-        ;
-
         HashCode hashCode = new HashCode();
         long dateMillis = System.currentTimeMillis();
         hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());

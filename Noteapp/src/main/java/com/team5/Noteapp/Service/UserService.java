@@ -1,18 +1,23 @@
 package com.team5.Noteapp.Service;
 
+import com.team5.Noteapp.Entity.HashCode;
+import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Entity.UserInfo;
 import com.team5.Noteapp.Repository.UserInfoRepository;
+import com.team5.Noteapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.team5.Noteapp.Entity.User;
-import com.team5.Noteapp.Repository.UserRepository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
 
 @Service
 public class UserService {
+
+	@Autowired
+	private HashCodeService hashCodeService;
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -35,5 +40,17 @@ public class UserService {
 			}
 		}
 		throw new IllegalArgumentException("Specified user does not exists!");
+	}
+
+	public String login(@RequestParam String username, @RequestParam String pass) throws Exception {
+		System.out.println(username + pass);
+		User user = this.getUserByUserInfo(username, hashCodeService.passwordHash(pass));
+		HashCode hashCode;
+		if (user != null) {
+			hashCode = hashCodeService.createLoginHash(user);
+			return hashCode.getCode();
+		} else {
+			throw new IllegalArgumentException("Username or password is wrong!");
+		}
 	}
 }
