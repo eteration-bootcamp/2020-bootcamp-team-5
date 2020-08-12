@@ -1,7 +1,11 @@
 import React from 'react';
 import {Button, Modal} from 'react-bootstrap';
+import {useSelector} from 'react-redux';
 
 function ViewNote(props) {
+
+    const note = useSelector(state => state.currentNote);
+
     return (
       <Modal
         {...props}
@@ -11,14 +15,14 @@ function ViewNote(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            #note-title
+            {note.title}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            #note-body
+          {note.content}
         </Modal.Body>
         <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );

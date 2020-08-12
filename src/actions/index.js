@@ -3,3 +3,35 @@ export function switchForgotRegister() {
         type: "SWITCH_FORGOT_REGISTER"
     };
 };
+
+export function setCurrentViewNote(note) {
+    return {
+        type: "SET_CURRENT_VIEW_NOTE",
+        payload: note
+    };
+};
+
+export function setAllNotes(allNotes) {
+    return {
+        type: "SET_ALL_NOTES",
+        payload: allNotes
+    };
+};
+
+export function setDeletingStatusDeleted() {
+    return {
+        type: "SET_DELETING_STATUS_DELETED"
+    };
+};
+
+export function setDeletingAlertBoxClosed() {
+    return {
+        type: "SET_DELETING_ALERT_BOX_CLOSED"
+    };
+};
+
+export function setDeletingAlertBoxOpen() {
+    return {
+        type: "SET_DELETING_ALERT_BOX_OPEN"
+    };
+};
