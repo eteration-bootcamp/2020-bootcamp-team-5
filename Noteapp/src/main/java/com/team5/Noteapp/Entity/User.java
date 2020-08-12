@@ -11,65 +11,64 @@ import com.team5.Noteapp.Validator.PhoneNumber;
 
 @Entity
 public class User {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(nullable = false)
-	private String name;
-	
 
-	@Column(nullable = false)
-	private String surname;
-	
-	@PhoneNumber
-	private String phoneNumber;
-	
-	@Email
-	private String mail;
-	
-	public User() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public int getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private String name;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(nullable = false)
+    private String surname;
 
-	public String getName() {
-		return name;
-	}
+    @PhoneNumber
+    private String phoneNumber;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Email
+    private String mail;
 
-	public String getSurname() {
-		return surname;
-	}
+    public User() {
+        super();
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getMail() {
-		return mail;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

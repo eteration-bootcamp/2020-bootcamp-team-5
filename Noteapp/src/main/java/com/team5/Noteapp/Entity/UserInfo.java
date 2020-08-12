@@ -8,60 +8,61 @@ import javax.persistence.Id;
 
 @Entity
 public class UserInfo {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	private int userId;
-	
-	@Column(unique=true)
-	private String username;
-	
-	private String password;
 
-	private boolean isActive;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public UserInfo() {
-		super();
-	}
+    private int userId;
 
-	public int getId() {
-		return id;
-	}
+    @Column(unique = true)
+    private String username;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private String password;
 
-	public int getUserId() {
-		return userId;
-	}
+    private boolean isActive;
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public UserInfo() {
+        super();
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public boolean isActive() {
-		return isActive;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setActive(boolean active) {
-		isActive = active;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
