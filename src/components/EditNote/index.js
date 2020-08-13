@@ -5,12 +5,13 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {setAllNotes} from '../../actions';
 import {setCurrentViewNote} from '../../actions';
+import {UPDATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
 
 function EditNote(props) {
     const note = useSelector(state => state.currentNote);
+    const [editStatus, setEditStatus] = useState('');
     const dispatch = useDispatch();
 
-    /* Localhost will be changed as server ip and headers will be dynamic. */
     function updateNote() {
       const noteJSON = {
         'id': note.id,
@@ -18,13 +19,13 @@ function EditNote(props) {
         'content': `${note.content}`
       }
 
-      // If updating is successful, fetch all notes again.
-      axios.put(`http://localhost/notes/edit/${note.id}`, noteJSON, { 'headers': { 'auth': '1234' } })
+      axios.put(`${UPDATE_NOTE_API}${note.id}`, noteJSON, { 'headers': { 'auth': '1234' } })
         .then(res => {
 
-          axios.get("http://localhost/notes/all", { 'headers': { 'auth': '1234' } })
+          axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
             .then(res => {
                 dispatch(setAllNotes(res.data));
+                setEditStatus("Your note has been updated successfully! => " + noteJSON.title);
             })
             .catch(error => {
                 console.error(error.response);
@@ -65,7 +66,7 @@ function EditNote(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit your note: {note.title}
+            Edit your note: {note.title} {editStatus}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -89,6 +90,6 @@ function EditNote(props) {
         </Modal.Footer>
       </Modal>
     );
-  }
+}
   
 export default EditNote;

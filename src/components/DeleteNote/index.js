@@ -3,17 +3,16 @@ import {Button, Alert, Modal, Spinner} from 'react-bootstrap';
 import {setAllNotes, setDeletingAlertBoxClosed} from '../../actions';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
+import {ALL_NOTES_API} from '../../config/api';
 
 function DeleteNote(props) {
-
     const deletingStatusMessage = useSelector(state => state.deletingStatusMessage);
     const dispatch = useDispatch();
 
-    // If deleting is successful, fetch all notes again.
     function closeButtonOnClick() {
         dispatch(setDeletingAlertBoxClosed());
 
-        axios.get("http://localhost/notes/all", { 'headers': { 'auth': '1234' } })
+        axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
             .then(res => {
                 dispatch(setAllNotes(res.data));
             })
@@ -24,10 +23,10 @@ function DeleteNote(props) {
 
     return (
         <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
         >
             <Alert
                 {...props}
@@ -37,13 +36,12 @@ function DeleteNote(props) {
                         <span className="sr-only"></span>
                     </Spinner>
 
-                    {deletingStatusMessage}
+                    {' '} {deletingStatusMessage}
                 </Alert.Heading>
             </Alert>
             <Button variant="light" onClick={closeButtonOnClick}>Close</Button>
         </Modal>
-      );
-
+    );
 }
   
 export default DeleteNote;

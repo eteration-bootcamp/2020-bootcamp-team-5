@@ -8,7 +8,8 @@ import ShareNote from '../ShareNote';
 import ViewNote from '../ViewNote';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
-import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxClosed, setDeletingAlertBoxOpen} from '../../actions';
+import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxOpen} from '../../actions';
+import {READ_NOTE_API, DELETE_NOTE_API} from '../../config/api';
 
 function Note(props) {
     const [modalShow, setModalShow] = useState(false);
@@ -33,10 +34,8 @@ function Note(props) {
         deleteNote();
     }
 
-    /* Localhost will be changed as server ip and headers will be dynamic. */
     function viewNote() {
-
-        axios.get(`http://localhost/notes/${props.id}`, { 'headers': { 'auth': '1234' } })
+        axios.get(`${READ_NOTE_API}${props.id}`, { 'headers': { 'auth': '1234' } })
             .then(res => {
                 dispatch(setCurrentViewNote(res.data));
             })
@@ -45,12 +44,9 @@ function Note(props) {
             });
     }
 
-    /* Localhost will be changed as server ip and headers will be dynamic. */
     function deleteNote() {
-
-        axios.delete(`http://localhost/notes/delete/${props.id}`, { 'headers': { 'auth': '1234' } })
+        axios.delete(`${DELETE_NOTE_API}${props.id}`, { 'headers': { 'auth': '1234' } })
             .then(res => {
-                // SUCCESS
                 dispatch(setDeletingStatusDeleted());
             })
             .catch(error => {

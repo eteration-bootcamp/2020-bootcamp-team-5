@@ -5,6 +5,7 @@ import Note from '../components/Note';
 import AddNewNote from '../components/AddNewNote';
 import {useDispatch, useSelector} from 'react-redux';
 import {setAllNotes} from '../actions';
+import {ALL_NOTES_API} from '../config/api.js';
 import axios from 'axios';
 
 function NotesPage() {
@@ -12,9 +13,8 @@ function NotesPage() {
     const allNotes = useSelector(state => state.allNotes);
     const dispatch = useDispatch();
 
-    /* Localhost will be changed as server ip and headers will be dynamic. */
     useEffect(() => {
-        axios.get("http://localhost/notes/all", { 'headers': { 'auth': '1234' } })
+        axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
             .then(res => {
                 dispatch(setAllNotes(res.data));
             })

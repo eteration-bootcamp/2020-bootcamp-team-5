@@ -3,7 +3,6 @@ import {Button, Modal} from 'react-bootstrap';
 import {useSelector} from 'react-redux';
 
 function ViewNote(props) {
-
     const note = useSelector(state => state.currentNote);
 
     return (

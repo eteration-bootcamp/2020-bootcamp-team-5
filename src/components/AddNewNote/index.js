@@ -3,26 +3,23 @@ import {Button, Modal, Form, Col} from 'react-bootstrap';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {setAllNotes} from '../../actions';
+import {CREATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
 
 function AddNewNote(props) {
-
     const [header, setHeader] = useState('Add a new note!');
     const titleRef = useRef(null);
     const contentRef = useRef(null);
-
     const dispatch = useDispatch();
     
-    /* Localhost will be changed as server ip and headers will be dynamic. */
     function addNote() {
       const noteJSON = {
         'title': `${titleRef.current.value}`,
         'content': `${contentRef.current.value}`
       }
 
-      axios.post('http://localhost/notes/add/', noteJSON, { 'headers': { 'auth': '1234' } })
+      axios.post(CREATE_NOTE_API, noteJSON, { 'headers': { 'auth': '1234' } })
       .then(res => {
-
-        axios.get("http://localhost/notes/all", { 'headers': { 'auth': '1234' } })
+        axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
           .then(res => {
               dispatch(setAllNotes(res.data));
           })
@@ -70,6 +67,6 @@ function AddNewNote(props) {
         </Modal.Footer>
       </Modal>
     );
-  }
+}
   
 export default AddNewNote;
