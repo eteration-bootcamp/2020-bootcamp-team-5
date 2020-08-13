@@ -3,10 +3,7 @@ package com.team5.Noteapp.Controller;
 import com.team5.Noteapp.Service.HashCodeService;
 import com.team5.Noteapp.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,16 +17,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public void login(@RequestParam String username, @RequestParam String pass, HttpServletResponse httpServletResponse) throws Exception {
-        try {
-            userService.login(username, pass);
-        }catch (Exception e){
-            httpServletResponse.sendError(400, "Login failed!");
-        }
+    public String login(@RequestParam String username, @RequestParam String pass, HttpServletResponse httpServletResponse) throws Exception {
+            return  userService.login(username, pass);
     }
 
-    @PostMapping("/logout")
-    public void logout(@RequestAttribute String hashCode) {
+    @RequestMapping(value = "/logout")
+    public void logout(@RequestAttribute(required = false, value = "hashCode") String hashCode) {
             hashCodeService.deleteLoginHash(hashCode);
     }
 }

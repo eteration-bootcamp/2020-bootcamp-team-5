@@ -2,14 +2,12 @@ package com.team5.Noteapp.Controller;
 
 import java.util.Date;
 
+import com.team5.Noteapp.Entity.*;
+import com.team5.Noteapp.Service.HashCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team5.Noteapp.Entity.HashCode;
-import com.team5.Noteapp.Entity.Note;
-import com.team5.Noteapp.Entity.Permission;
-import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Repository.HashCodeRepository;
 import com.team5.Noteapp.Repository.NoteRepository;
 import com.team5.Noteapp.Repository.PermissionRepository;
@@ -22,6 +20,9 @@ public class MainController {
     private UserRepository userRepository;
 
     @Autowired
+    private HashCodeService hashCodeService;
+
+    @Autowired
     private NoteRepository noteRepository;
     @Autowired
     private PermissionRepository permissionRepository;
@@ -30,6 +31,8 @@ public class MainController {
 
     @PutMapping("/create")
     public void createDB() {
+        UserInfo userInfo = new UserInfo();
+        User user3 = new User();
         User user = new User();
         User user2 = new User();
         Note note = new Note();
@@ -41,6 +44,18 @@ public class MainController {
 
         HashCode hashCode = new HashCode();
         HashCode hashCode2 = new HashCode();
+        HashCode hashCode3 = new HashCode();
+
+        userInfo.setUsername("sercan");
+        userInfo.setPassword(hashCodeService.passwordHash("123"));
+        userInfo.setActive(true);
+
+        user3.setUserInfo(userInfo);
+        user3.setName("Secoo");
+        user3.setSurname("Ak");
+        userRepository.save(user3);
+        System.out.println(user3.toString());
+        System.out.println(userRepository.findById(user3.getId()).toString());
 
         user.setMail("noteration@gmail.com");
         user.setPhoneNumber("00000000000");
@@ -84,6 +99,11 @@ public class MainController {
         hashCode2.setType("Login");
         hashCode2.setUserId(2);
 
+        hashCode3.setCode("12");
+        hashCode3.setExDate(new Date(System.currentTimeMillis() + 999999999));
+        hashCode3.setType("Logout");
+        hashCode3.setUserId(1);
+
         userRepository.save(user);
         userRepository.save(user2);
         noteRepository.save(note);
@@ -94,5 +114,6 @@ public class MainController {
         permissionRepository.save(permission4);
         hashCodeRepository.save(hashCode);
         hashCodeRepository.save(hashCode2);
+        hashCodeRepository.save(hashCode3);
     }
 }

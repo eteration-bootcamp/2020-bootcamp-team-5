@@ -19,6 +19,7 @@ public class WebInterceptorConfig implements WebMvcConfigurer {
 		excludePathPatterns.add("/login");
 		excludePathPatterns.add("/register");
 		excludePathPatterns.add("/create");
+		excludePathPatterns.add("/logout");
 	}
 	
 	

@@ -42,15 +42,12 @@ public class UserService {
 		throw new IllegalArgumentException("Specified user does not exists!");
 	}
 
-	public String login(@RequestParam String username, @RequestParam String pass) throws Exception {
-		System.out.println(username + pass);
+	public String login(String username, String pass) throws Exception {
 		User user = this.getUserByUserInfo(username, hashCodeService.passwordHash(pass));
 		HashCode hashCode;
 		if (user != null) {
 			hashCode = hashCodeService.createLoginHash(user);
 			return hashCode.getCode();
-		} else {
-			throw new IllegalArgumentException("Username or password is wrong!");
-		}
+		} else return null;
 	}
 }

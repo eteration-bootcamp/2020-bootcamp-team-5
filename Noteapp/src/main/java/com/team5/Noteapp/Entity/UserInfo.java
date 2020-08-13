@@ -1,10 +1,6 @@
 package com.team5.Noteapp.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class UserInfo {
@@ -13,7 +9,8 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int userId;
+    @OneToOne(mappedBy = "userInfo")
+    private User user;
 
     @Column(unique = true)
     private String username;
@@ -34,12 +31,12 @@ public class UserInfo {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getUsername() {

@@ -1,10 +1,6 @@
 package com.team5.Noteapp.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.team5.Noteapp.Validator.Email;
 import com.team5.Noteapp.Validator.PhoneNumber;
@@ -15,6 +11,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private UserInfo userInfo;
 
     @Column(nullable = false)
     private String name;
@@ -70,5 +70,25 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userInfoUsername=" + userInfo.getUsername() + ", userInfoPassword=" + userInfo.getPassword() +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", mail='" + mail + '\'' +
+                '}';
     }
 }
