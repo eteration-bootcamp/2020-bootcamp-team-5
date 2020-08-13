@@ -11,6 +11,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
+				.logout()
+				.disable()
 		.authorizeRequests()
 			.antMatchers("/**").permitAll()
 			.anyRequest().authenticated()

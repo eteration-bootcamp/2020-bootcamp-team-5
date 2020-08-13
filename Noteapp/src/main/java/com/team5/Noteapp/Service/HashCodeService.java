@@ -22,6 +22,7 @@ public class HashCodeService {
         HashCode hashCode = new HashCode();
         long dateMillis = System.currentTimeMillis();
         hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
+        hashCode.setUserId(user.getId());
         hashCode.setExDate(new Date(dateMillis + 7200000));
         return hashCodeRepository.save(hashCode);
     }
@@ -30,7 +31,7 @@ public class HashCodeService {
         hashCodeRepository.deleteLoginHash(hashCode);
     }
 
-    public String passwordHash(String pass) {
+    public String createPasswordHash(String pass) {
         return Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
     }
 

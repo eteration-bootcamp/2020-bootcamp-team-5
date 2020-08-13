@@ -3,15 +3,11 @@ package com.team5.Noteapp.Controller;
 import java.util.Date;
 
 import com.team5.Noteapp.Entity.*;
+import com.team5.Noteapp.Repository.*;
 import com.team5.Noteapp.Service.HashCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.team5.Noteapp.Repository.HashCodeRepository;
-import com.team5.Noteapp.Repository.NoteRepository;
-import com.team5.Noteapp.Repository.PermissionRepository;
-import com.team5.Noteapp.Repository.UserRepository;
 
 @RestController
 public class MainController {
@@ -28,6 +24,9 @@ public class MainController {
     private PermissionRepository permissionRepository;
     @Autowired
     private HashCodeRepository hashCodeRepository;
+
+    @Autowired
+    private UserInfoRepository userInfoRepository;
 
     @PutMapping("/create")
     public void createDB() {
@@ -46,14 +45,16 @@ public class MainController {
         HashCode hashCode2 = new HashCode();
         HashCode hashCode3 = new HashCode();
 
-        userInfo.setUsername("sercan");
-        userInfo.setPassword(hashCodeService.passwordHash("123"));
-        userInfo.setActive(true);
-
-        user3.setUserInfo(userInfo);
         user3.setName("Secoo");
         user3.setSurname("Ak");
         userRepository.save(user3);
+        userInfo.setUsername("sercan");
+        userInfo.setPassword(hashCodeService.createPasswordHash("123"));
+        userInfo.setActive(true);
+        userInfo.setUser(user3);
+
+
+
         System.out.println(user3.toString());
         System.out.println(userRepository.findById(user3.getId()).toString());
 
@@ -99,12 +100,9 @@ public class MainController {
         hashCode2.setType("Login");
         hashCode2.setUserId(2);
 
-        hashCode3.setCode("12");
-        hashCode3.setExDate(new Date(System.currentTimeMillis() + 999999999));
-        hashCode3.setType("Logout");
-        hashCode3.setUserId(1);
 
         userRepository.save(user);
+        userInfoRepository.save(userInfo);
         userRepository.save(user2);
         noteRepository.save(note);
         noteRepository.save(note2);

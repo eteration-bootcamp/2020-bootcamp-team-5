@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String pass, HttpServletResponse httpServletResponse) throws Exception {
-            return  userService.login(username, pass);
+            return userService.login(username, pass);
     }
 
     @RequestMapping(value = "/logout")

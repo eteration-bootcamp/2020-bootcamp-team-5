@@ -9,7 +9,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(mappedBy = "userInfo")
+    @OneToOne
     private User user;
 
     @Column(unique = true)

@@ -7,7 +7,6 @@ import com.team5.Noteapp.Repository.UserInfoRepository;
 import com.team5.Noteapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -33,7 +32,7 @@ public class UserService {
 		Optional<User> user = null;
 		if(userInfoOptional.isPresent()){
 			if(userInfoOptional.get().isActive()){
-				user = userRepository.findById(userInfoOptional.get().getId());
+				user = userRepository.findById(userInfoOptional.get().getUser().getId());
 				if(user.isPresent()){
 					return  user.get();
 				}
@@ -43,7 +42,7 @@ public class UserService {
 	}
 
 	public String login(String username, String pass) throws Exception {
-		User user = this.getUserByUserInfo(username, hashCodeService.passwordHash(pass));
+		User user = this.getUserByUserInfo(username, hashCodeService.createPasswordHash(pass));
 		HashCode hashCode;
 		if (user != null) {
 			hashCode = hashCodeService.createLoginHash(user);
