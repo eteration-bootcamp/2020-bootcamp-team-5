@@ -130,6 +130,22 @@ body {
     color: #202c39;
 }
 
+.not-found-container {
+    background-color: #202c39;
+}
+
+.not-found-col {
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+}
+
+.not-found-button {
+    margin-top: 5vh;
+    border-radius: 10px;
+}
+
 @media only screen and (max-width: 768px) { 
     .logo-responsive {
         display: grid;

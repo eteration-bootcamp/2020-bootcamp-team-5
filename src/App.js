@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import WelcomePage from './containers/WelcomePage';
 import NotesPage from './containers/NotesPage';
+import PageNotFound from './containers/PageNotFound';
 
 const store = createStore(
   reducer,
@@ -20,6 +21,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={WelcomePage} />
             <Route exact path="/notes" component={NotesPage} />
+            <Route exact path="*" component={PageNotFound} />
           </Switch>
         </Router>
   );
