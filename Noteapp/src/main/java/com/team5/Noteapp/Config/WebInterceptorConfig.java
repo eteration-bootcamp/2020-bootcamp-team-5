@@ -13,21 +13,23 @@ import com.team5.Noteapp.Util.AuthInterceptor;
 @Configuration
 public class WebInterceptorConfig implements WebMvcConfigurer {
 	private static List<String> excludePathPatterns;
-	
+
 	static {
 		excludePathPatterns = new ArrayList<String>();
 		excludePathPatterns.add("/login");
 		excludePathPatterns.add("/register");
 		excludePathPatterns.add("/create");
 		excludePathPatterns.add("/logout");
+		excludePathPatterns.add("/signup");
+		excludePathPatterns.add("/forgot-password");
+		excludePathPatterns.add("/new-password");
 	}
-	
-	
+
 	@Bean
 	public AuthInterceptor authenticationInterceptor() {
 		return new AuthInterceptor();
 	}
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePathPatterns);

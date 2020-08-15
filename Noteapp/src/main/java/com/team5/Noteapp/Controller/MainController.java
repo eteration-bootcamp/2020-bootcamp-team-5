@@ -1,13 +1,13 @@
 package com.team5.Noteapp.Controller;
 
-import java.util.Date;
-
 import com.team5.Noteapp.Entity.*;
 import com.team5.Noteapp.Repository.*;
 import com.team5.Noteapp.Service.HashCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
 
 @RestController
 public class MainController {
@@ -52,11 +52,12 @@ public class MainController {
         userInfo.setPassword(hashCodeService.createPasswordHash("123"));
         userInfo.setActive(true);
         userInfo.setUser(user3);
-
-
+        userInfoRepository.save(userInfo);
 
         System.out.println(user3.toString());
         System.out.println(userRepository.findById(user3.getId()).toString());
+        System.out.println(userInfo.toString());
+        System.out.println(userInfoRepository.findById(userInfo.getId()).toString());
 
         user.setMail("noteration@gmail.com");
         user.setPhoneNumber("00000000000");
@@ -102,7 +103,6 @@ public class MainController {
 
 
         userRepository.save(user);
-        userInfoRepository.save(userInfo);
         userRepository.save(user2);
         noteRepository.save(note);
         noteRepository.save(note2);

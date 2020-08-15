@@ -12,6 +12,7 @@ import com.team5.Noteapp.Service.NoteService;
 
 @RequestMapping("/notes")
 @RestController
+@CrossOrigin
 public class NoteController {
 
     @Autowired

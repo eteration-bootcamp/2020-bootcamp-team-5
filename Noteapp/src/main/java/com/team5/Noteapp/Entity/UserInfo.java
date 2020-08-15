@@ -9,7 +9,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     @Column(unique = true)
@@ -61,5 +61,16 @@ public class UserInfo {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", user=" + user +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                 ", isActive=" + isActive +
+                '}';
     }
 }

@@ -33,12 +33,14 @@ public class MailService {
     }
 
     public void sendMail(String to, String subject, String emailBody) {
+        String url="http://localhost/new-password";
+        String content="<a href='"+url+"'>"+url+"</a>";
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("Team5"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
-            message.setContent(emailBody, "text/html; charset=utf-8");
+            message.setContent(emailBody+" "+content,"text/html; charset=utf-8");
             Transport.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
