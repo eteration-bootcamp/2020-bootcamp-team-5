@@ -73,4 +73,8 @@ public class UserService {
 			return "Signup successful!";
 		} else throw new IllegalArgumentException("Signup Failed!");
 	}
+
+	public void auth(){
+
+	}
 }
