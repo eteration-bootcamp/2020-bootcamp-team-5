@@ -35,7 +35,7 @@ function Note(props) {
     }
 
     function viewNote() {
-        axios.get(`${READ_NOTE_API}${props.id}`, { 'headers': { 'auth': '1234' } })
+        axios.get(`${READ_NOTE_API}${props.id}`, { 'headers': { 'auth': localStorage.getItem('auth') } })
             .then(res => {
                 dispatch(setCurrentViewNote(res.data));
             })
@@ -45,7 +45,7 @@ function Note(props) {
     }
 
     function deleteNote() {
-        axios.delete(`${DELETE_NOTE_API}${props.id}`, { 'headers': { 'auth': '1234' } })
+        axios.delete(`${DELETE_NOTE_API}${props.id}`, { 'headers': { 'auth': localStorage.getItem('auth') } })
             .then(res => {
                 dispatch(setDeletingStatusDeleted());
             })

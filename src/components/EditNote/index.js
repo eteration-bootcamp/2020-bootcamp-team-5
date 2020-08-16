@@ -19,10 +19,10 @@ function EditNote(props) {
         'content': `${note.content}`
       }
 
-      axios.put(`${UPDATE_NOTE_API}${note.id}`, noteJSON, { 'headers': { 'auth': '1234' } })
+      axios.put(`${UPDATE_NOTE_API}${note.id}`, noteJSON, { 'headers': { 'auth': localStorage.getItem('auth') } })
         .then(res => {
 
-          axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
+          axios.get(ALL_NOTES_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
             .then(res => {
                 dispatch(setAllNotes(res.data));
                 setEditStatus("Your note has been updated successfully! => " + noteJSON.title);

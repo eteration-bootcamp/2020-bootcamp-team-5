@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { createStore } from 'redux';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
@@ -15,18 +15,22 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+//TODO add isLoggedIn service from backend.
+const auth = () => {
+  return localStorage.getItem("auth");
+}
+
 const App = () => {
   return (
         <Router>
           <Switch>
-            <Route exact path="/" component={WelcomePage} />
-            <Route exact path="/notes" component={NotesPage} />
+            <Route exact path="/" render={() => (auth() ? (<Redirect to="/notes" />) : (<WelcomePage />))} />
+            <Route exact path="/notes" render={() => (auth() ? (<NotesPage />) : (<Redirect to="/" />))} />
             <Route exact path="*" component={PageNotFound} />
           </Switch>
         </Router>
   );
 };
-
 
 export default App;
 

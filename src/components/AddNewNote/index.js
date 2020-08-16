@@ -17,9 +17,9 @@ function AddNewNote(props) {
         'content': `${contentRef.current.value}`
       }
 
-      axios.post(CREATE_NOTE_API, noteJSON, { 'headers': { 'auth': '1234' } })
+      axios.post(CREATE_NOTE_API, noteJSON, { 'headers': { 'auth': localStorage.getItem('auth') } })
       .then(res => {
-        axios.get(ALL_NOTES_API, { 'headers': { 'auth': '1234' } })
+        axios.get(ALL_NOTES_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
           .then(res => {
               dispatch(setAllNotes(res.data));
           })

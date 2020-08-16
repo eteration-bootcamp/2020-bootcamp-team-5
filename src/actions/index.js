@@ -35,3 +35,29 @@ export function setDeletingAlertBoxOpen() {
         type: "SET_DELETING_ALERT_BOX_OPEN"
     };
 };
+
+export function showToastBox() {
+    return {
+        type: "SHOW_TOAST_BOX"
+    };
+};
+
+export function closeToastBox() {
+    return {
+        type: "CLOSE_TOAST_BOX"
+    };
+}
+
+export function setToastTitle(title) {
+    return {
+        type: "SET_TOAST_TITLE",
+        payload: title
+    };
+}
+
+export function setToastContent(content) {
+    return {
+        type: "SET_TOAST_CONTENT",
+        payload: content
+    };
+}

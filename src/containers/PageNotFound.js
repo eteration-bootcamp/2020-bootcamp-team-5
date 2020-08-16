@@ -29,7 +29,7 @@ function PageNotFound() {
             </Row>
 
             <Row>
-              <Button onClick={routeChange}className="not-found-button" variant="warning" size="lg">
+              <Button onClick={routeChange} className="not-found-button" variant="warning" size="lg">
                   BACK TO HOME
               </Button>
             </Row>

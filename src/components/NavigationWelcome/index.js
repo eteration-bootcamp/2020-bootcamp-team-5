@@ -3,6 +3,7 @@ import {Row, Col, Navbar} from 'react-bootstrap';
 import logo from '../../img/noteration-logo.png';
 import LoginForm from '../LoginForm';
 import '../../styles/Main.css';
+import CustomToast from '../CustomToast';
 
 function NavigationWelcome() {
     return(
@@ -21,13 +22,19 @@ function NavigationWelcome() {
                                 alt="Noteration"
                             />
                         </Navbar.Brand>
+
+                        
                     </Col>
 
                     <Col xs={12} md={6} lg={5} xl={4}>
                         <LoginForm/>
                     </Col>
 
-                    <Col lg={2} className="d-none d-lg-block"></Col>
+                    <Col lg={2}>
+                        <Row className="justify-content-center">
+                            <CustomToast/>
+                        </Row> 
+                    </Col>
                 </Row>
             </Navbar>
         </>
