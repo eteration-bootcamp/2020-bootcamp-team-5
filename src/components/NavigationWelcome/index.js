@@ -30,7 +30,7 @@ function NavigationWelcome() {
                         <LoginForm/>
                     </Col>
 
-                    <Col lg={2}>
+                    <Col lg={2} className="toast-container">
                         <Row className="justify-content-center">
                             <CustomToast/>
                         </Row> 

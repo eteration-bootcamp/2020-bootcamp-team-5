@@ -37,10 +37,6 @@ body {
 
 .forgot-password-text {
     padding: 0;
-    font-size: medium;
-    color: #F4F5F5;
-    background-color: transparent;
-    border-color: transparent;
 }
 
 .go-back-button {
@@ -48,12 +44,19 @@ body {
     color: #202c39;
 }
 
- /* Forgot password button */
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+.btn-link:hover, 
+.btn-link:focus, 
+.btn-link:active, 
+.btn-link.active, .open>.dropdown-toggle.btn-link {
     color: lightsteelblue;
     background-color: transparent;
     border-color: transparent;
     box-shadow: none;
+    text-decoration: none;
+}
+
+.logout-text {
+    padding: 0;
 }
 
 .slogan-container {
@@ -108,7 +111,7 @@ body {
 
 .navigation-user-info {
     display: grid;
-    align-items: center;
+    align-content: center;
     justify-items: right;
 }
 
@@ -152,8 +155,8 @@ body {
 }
 
 .toast-container {
-    margin: 5% 0% 5% 0%;
-    float: right;
+    display: grid;
+    align-content: center;
 }
 
 @media only screen and (max-width: 768px) { 
@@ -175,6 +178,10 @@ body {
         height: 100%;
     }
 
+    .slogan-container {
+        margin-top: 5%;
+    }
+
     .auth-container-out {
         padding: 0 5% 5% 5%;
         margin-bottom: 0;
@@ -190,6 +197,10 @@ body {
 
     .note-container {
         margin-left: 2%;
+    }
+
+    .toast-container {
+        margin-top: 5%;
     }
 }
 

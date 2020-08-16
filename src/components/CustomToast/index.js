@@ -13,7 +13,7 @@ function CustomToast() {
 
     return(
         <>
-            <Toast show={showToast} onClose={() => dispatch(closeToastBox())} className="toast-container">
+            <Toast show={showToast} onClose={() => dispatch(closeToastBox())}>
                 <Toast.Header>
                     <BellFill className="mr-2"/>
                     <strong className="mr-auto">{toastTitle}</strong>

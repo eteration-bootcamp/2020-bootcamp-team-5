@@ -10,7 +10,7 @@ import {setToastTitle, setToastContent, showToastBox} from '../../actions';
 
 function LoginForm() {
     const dispatch = useDispatch();
-    const [username, setUserName] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
 
@@ -19,8 +19,8 @@ function LoginForm() {
       history.push(path);
     }
 
-    function grabUserName(e) {
-        setUserName(e.target.value);
+    function grabUsername(e) {
+        setUsername(e.target.value);
     }
 
     function grabPassword(e) {
@@ -28,7 +28,7 @@ function LoginForm() {
     }
 
     function login(e) {
-        event.preventDefault();
+        e.preventDefault();
 
         const userJSON = {
             'username': `${username}`,
@@ -61,7 +61,7 @@ function LoginForm() {
                             placeholder="Username"
                             aria-label="Username"
                             aria-describedby="formBasicUsername"
-                            onChange={e => grabUserName(e)}
+                            onChange={e => grabUsername(e)}
                         />
                     </InputGroup>
                 </Col>
@@ -83,7 +83,7 @@ function LoginForm() {
                         <Row className="w-100"></Row>
 
                         <Form.Text>
-                            <Button variant="secondary" className="forgot-password-text" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>Forgot password?</Button>
+                            <Button variant="link" className="forgot-password-text" onClick={() => dispatch({ type: 'SWITCH_FORGOT_REGISTER' })}>Forgot password?</Button>
                         </Form.Text>
                     </InputGroup>
                 </Col>
