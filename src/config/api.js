@@ -8,3 +8,5 @@ export const LOGIN_API = "http://team5.metindogancelik.com:8080/login";
 export const LOGOUT_API = "http://team5.metindogancelik.com:8080/logout?hashCode=";
 export const SIGNUP_API = "http://team5.metindogancelik.com:8080/signup";
 export const AUTH_API = "http://team5.metindogancelik.com:8080/auth";
+export const FORGOT_PASSWORD_API = "http://team5.metindogancelik.com:8080/forgot-password?username="
+export const NEW_PASSWORD_API = "http://team5.metindogancelik.com:8080/new-password/"

@@ -159,6 +159,28 @@ body {
     align-content: center;
 }
 
+.reset-password-container {
+    background-color: #202c39;
+    height: 100vh;
+}
+
+.reset-password-col {
+    height: 100vh;
+    padding: 15% 15% 15% 15%;
+}
+
+.reset-password-box {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    padding: 0% 5% 0% 5%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    color: #202c39;
+    background: #FBFAF8;
+}
+
 @media only screen and (max-width: 768px) { 
     .logo-responsive {
         display: grid;

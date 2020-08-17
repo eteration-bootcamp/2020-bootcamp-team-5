@@ -11,6 +11,7 @@ import axios from 'axios';
 import WelcomePage from './containers/WelcomePage';
 import NotesPage from './containers/NotesPage';
 import PageNotFound from './containers/PageNotFound';
+import ResetPasswordPage from './containers/ResetPasswordPage';
 
 const store = createStore(
   reducer,
@@ -45,6 +46,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={() => homePage(authResult, setAuthResult)} />
         <Route exact path="/notes" component={() => requireAuth(NotesPage, authResult, setAuthResult)} />
+        <Route path = "/new-password/:id" render={(props) => (<ResetPasswordPage {...props } />)} />
         <Route exact path="*" component={PageNotFound} />
       </Switch>
     </Router>
