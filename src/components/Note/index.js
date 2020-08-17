@@ -8,7 +8,7 @@ import ShareNote from '../ShareNote';
 import ViewNote from '../ViewNote';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
-import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxOpen} from '../../actions';
+import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxOpen, setDeletingStatusNoAuthory} from '../../actions';
 import {READ_NOTE_API, DELETE_NOTE_API} from '../../config/api';
 
 function Note(props) {
@@ -34,6 +34,12 @@ function Note(props) {
         deleteNote();
     }
 
+    function shareButtonOnClick() {
+        viewNote();
+        setShareShow(true);
+    }
+
+
     function viewNote() {
         axios.get(`${READ_NOTE_API}${props.id}`, { 'headers': { 'auth': localStorage.getItem('auth') } })
             .then(res => {
@@ -50,7 +56,7 @@ function Note(props) {
                 dispatch(setDeletingStatusDeleted());
             })
             .catch(error => {
-                console.error(error.response);
+                dispatch(setDeletingStatusNoAuthory());
             });
     }
 
@@ -76,7 +82,7 @@ function Note(props) {
                     <DeleteNote
                         show={deletingAlertBox}
                     />
-                    <Button variant="info" onClick={() => setShareShow(true)}><Share/></Button>
+                    <Button variant="info" onClick={shareButtonOnClick}><Share/></Button>
                     <ShareNote
                         show={shareShow}
                         title={props.title}

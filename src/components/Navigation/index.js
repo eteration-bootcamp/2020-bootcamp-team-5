@@ -1,19 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Row, Col, Navbar, Button} from 'react-bootstrap';
 import logo from '../../img/noteration-logo.png';
 import '../../styles/Main.css';
 import {LOGOUT_API} from '../../config/api';
 import axios from 'axios';
-import {setToastTitle, setToastContent, showToastBox} from '../../actions';
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const Navigation = () => {
-  const history = useHistory();
-
-  const routeChange = () =>{ 
-    let path = '/'; 
-    history.push(path);
-  }
+  const [logoutResult, setLogoutResult] = useState(false);
 
   function logout(e) {
     e.preventDefault();
@@ -21,15 +15,16 @@ const Navigation = () => {
     axios.post(LOGOUT_API + localStorage.getItem("auth"))
       .then(res => {
         localStorage.removeItem("auth");
-        routeChange();
+        setLogoutResult(true);
       })
       .catch(error => {
         localStorage.removeItem("auth");
-        routeChange();
+        setLogoutResult(true);
       });
   }
 
   return (
+    logoutResult ? <Redirect to ="/" /> :
     <>
       <Navbar className="navigation-container" expand="lg">
         <Row className="full-width">

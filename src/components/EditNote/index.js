@@ -21,30 +21,27 @@ function EditNote(props) {
 
       axios.put(`${UPDATE_NOTE_API}${note.id}`, noteJSON, { 'headers': { 'auth': localStorage.getItem('auth') } })
         .then(res => {
+          setEditStatus(`Edit your note! Status: Your note (${noteJSON.title}) has been updated successfully!`);
 
           axios.get(ALL_NOTES_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
             .then(res => {
-                dispatch(setAllNotes(res.data));
-                setEditStatus("Your note has been updated successfully! => " + noteJSON.title);
+              dispatch(setAllNotes(res.data));
             })
-            .catch(error => {
-                console.error(error.response);
-            });
-
+            .catch(error => {});
         })
         .catch(error => {
-            console.error(error.response);
+          setEditStatus("Edit your note! Status: You have no updating authority for this note!");
         });
     }
 
     function editTitle(e) {
-        const newNote = {
-          id: `${note.id}`,
-          title: e.target.value, 
-          content: `${note.content}`
-        }
+      const newNote = {
+        id: `${note.id}`,
+        title: e.target.value, 
+        content: `${note.content}`
+      }
 
-        dispatch(setCurrentViewNote(newNote));
+      dispatch(setCurrentViewNote(newNote));
     }
 
     function editContent(e) {
@@ -54,7 +51,7 @@ function EditNote(props) {
         content: e.target.value
       }
         
-        dispatch(setCurrentViewNote(newNote));
+      dispatch(setCurrentViewNote(newNote));
     }
 
     return (
@@ -66,7 +63,7 @@ function EditNote(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Edit your note: {note.title} {editStatus}
+            {editStatus}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
