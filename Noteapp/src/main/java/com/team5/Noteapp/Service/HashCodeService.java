@@ -35,16 +35,38 @@ public class HashCodeService {
         return Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
     }
 
-    public String createActivationHash(String email) {
+    public String createActivationHash(User user) {
         HashCode hashCode = new HashCode();
         hashCode.setType("Activation");
         long dateMillis = System.currentTimeMillis();
-        hashCode.setCode(Hashing.sha256().hashString(dateMillis + email, StandardCharsets.UTF_8).toString());
+        hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
+        hashCode.setUserId(user.getId());
         hashCode.setExDate(new Date(dateMillis + 72000000));
         return hashCodeRepository.save(hashCode).getCode();
     }
 
+    public String createResetPasswordHash(User user) {
+        HashCode hashCode = new HashCode();
+        hashCode.setType("Reset");
+        long dateMillis = System.currentTimeMillis();
+        hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
+        hashCode.setUserId(user.getId());
+        hashCode.setExDate(new Date(dateMillis + 72000000));
+        return hashCodeRepository.save(hashCode).getCode();
+    }
+
+    public HashCode findHashCode(String hashCode){
+        Optional<HashCode> optionalHashCode = hashCodeRepository.findByHashCode(hashCode);
+        if (optionalHashCode.isPresent())
+            return optionalHashCode.get();
+        else throw new IllegalArgumentException("Hashcode not found");
+    }
+
     public Optional<HashCode> getLoginHash(String code) {
         return hashCodeRepository.findByHashCode(code);
+    }
+
+    public void deleteHashCode(int userId) {
+        hashCodeRepository.deleteHashCode(userId);
     }
 }

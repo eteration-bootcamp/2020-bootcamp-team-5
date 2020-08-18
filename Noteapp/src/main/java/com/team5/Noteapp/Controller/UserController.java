@@ -1,26 +1,23 @@
 package com.team5.Noteapp.Controller;
 
 import com.team5.Noteapp.Dto.UserDto;
+import com.team5.Noteapp.Entity.HashCode;
 import com.team5.Noteapp.Entity.UserInfo;
-import com.team5.Noteapp.Repository.ResetRepository;
-import com.team5.Noteapp.Repository.UserInfoRepository;
 import com.team5.Noteapp.Service.HashCodeService;
+import com.team5.Noteapp.Service.UserInfoService;
 import com.team5.Noteapp.Service.UserService;
-import com.team5.Noteapp.Util.MailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
+
 
 @RestController
 @CrossOrigin
 public class UserController {
-
-    @Autowired
-    private UserInfoRepository userInfoRepository;
 
     @Autowired
     private HashCodeService hashCodeService;
@@ -29,10 +26,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private MailService mailService;
-
-    @Autowired
-    private ResetRepository resetRepository;
+    private UserInfoService userInfoService;
 
     @PostMapping("/login")
     public String login(@RequestBody UserInfo userInfo) throws Exception {
@@ -49,22 +43,42 @@ public class UserController {
         try {
             userService.signup(userDto);
         }catch (Exception e){
-            httpServletResponse.sendError(400, "JUNG DIFF");
+            httpServletResponse.sendError(401, "JUNG DIFF");
         }
     }
 
     @PostMapping(value = "/forgot-password")
-    public void forgotPassword(@RequestParam String username)  {
-        mailService.sendMail(username);
+    public void forgotPassword(@RequestParam String email)  {
+        userService.sendMailForResetPassword(email);
     }
 
-    @RequestMapping(value = "/new-password/{resetCode}", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public void newPassword(@PathVariable int resetCode, @RequestBody String newPassword){
+    //TODO DELETE HASH
+    @RequestMapping(value = "/new-password/{hashCode}", consumes = MediaType.TEXT_PLAIN_VALUE)
+    public String newPassword(@PathVariable String hashCode, @RequestBody String newPassword, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(newPassword);
-        //TODO find user with resetCode and set new Password
-        Optional<UserInfo> userInfo = userInfoRepository.findById(resetRepository.findUserInfoIdByResetCode(resetCode).get());
-        userInfo.get().setPassword(hashCodeService.createPasswordHash(newPassword));
-        userInfoRepository.save(userInfo.get());
+        HashCode hashCodeObj = hashCodeService.findHashCode(hashCode);
+        try{
+            if(hashCodeObj.getType().equals("Reset") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()){
+                userInfoService.resetPassword(hashCodeObj.getUserId(), newPassword);
+                hashCodeService.deleteHashCode(hashCodeObj.getUserId());
+            }return "New password has been set";
+        } catch (Exception e){
+            httpServletResponse.sendError(401);
+            return "Failed to reset password";
+        }
+    }
+
+    @PostMapping("/activate-account/{hashCode}")
+    public String activateAccount(@PathVariable String hashCode, HttpServletResponse httpServletResponse) throws IOException {
+        HashCode hashCodeObj = hashCodeService.findHashCode(hashCode);
+        try{
+            if (hashCodeObj.getType().equals("Activation") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()){
+                userInfoService.activateAccount(hashCodeObj.getUserId());
+            }return "Your account has been activated";
+        }catch (Exception e){
+            httpServletResponse.sendError(401);
+            return "Couldn't activate your account";
+        }
     }
 
     @GetMapping("/auth")

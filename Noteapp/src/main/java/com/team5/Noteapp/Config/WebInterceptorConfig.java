@@ -23,6 +23,7 @@ public class WebInterceptorConfig implements WebMvcConfigurer {
 		excludePathPatterns.add("/signup");
 		excludePathPatterns.add("/forgot-password");
 		excludePathPatterns.add("/new-password/**");
+		excludePathPatterns.add("/activate-account/**");
 	}
 
 	@Bean
