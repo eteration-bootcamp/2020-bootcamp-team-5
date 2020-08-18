@@ -4,8 +4,10 @@ import javax.persistence.*;
 
 import com.team5.Noteapp.Validator.Email;
 import com.team5.Noteapp.Validator.PhoneNumber;
+import lombok.Data;
 
 @Entity
+@Data
 public class User {
 
     @Id
@@ -23,50 +25,6 @@ public class User {
 
     @Email
     private String mail;
-
-    public User() {
-        super();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 
     @Override
     public String toString() {
