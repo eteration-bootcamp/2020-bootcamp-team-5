@@ -74,7 +74,6 @@ public class NoteService {
     }
 
     public void shareNote(int noteId, String userId, int role) {
-        //TODO role == 0 read, role == 1 read&write
         Optional<UserInfo> userInfoOptional = userInfoRepository.findByUsername(userId);
         if (userInfoOptional.isPresent()) {
             Permission permission = new Permission();
@@ -83,10 +82,7 @@ public class NoteService {
             if (role == 0) {
                 permission.setRole("read");
                 permissionRepository.save(permission);
-            } else if (role == 1) {
-                permission.setRole("write");
-                permissionRepository.save(permission);
-            } else if (role == 2) {
+            }else if (role == 1) {
                 Permission permission2 = new Permission();
                 permission2.setNoteId(noteId);
                 permission2.setUserId(userInfoOptional.get().getId());

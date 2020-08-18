@@ -86,7 +86,6 @@ public class UserService {
             userInfoRepository.save(userInfo);
             userRepository.save(user);
             this.sendMailForAccountActivation(userDto.getMail());
-            //TODO do the same with Activation hash then set true
             System.out.println(userRepository.findById(user.getId()).toString());
             System.out.println(userInfoRepository.findById(userInfo.getId()).toString());
             return "Signup successful!";
