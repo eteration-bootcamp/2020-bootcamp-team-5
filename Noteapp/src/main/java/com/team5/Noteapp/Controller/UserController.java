@@ -2,11 +2,13 @@ package com.team5.Noteapp.Controller;
 
 import com.team5.Noteapp.Dto.UserDto;
 import com.team5.Noteapp.Entity.HashCode;
+import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Entity.UserInfo;
 import com.team5.Noteapp.Service.HashCodeService;
 import com.team5.Noteapp.Service.UserInfoService;
 import com.team5.Noteapp.Service.UserService;
 
+import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -48,23 +50,25 @@ public class UserController {
     }
 
     @PostMapping(value = "/forgot-password")
-    public void forgotPassword(@RequestParam String email)  {
-        userService.sendMailForResetPassword(email);
+    public void forgotPassword(@RequestParam String email, HttpServletResponse  httpServletResponse) throws IOException {
+        try{
+            userService.sendMailForResetPassword(email);
+        }catch (Exception e){
+            httpServletResponse.sendError(401, e.getStackTrace().toString());
+        }
     }
 
-    //TODO DELETE HASH
     @RequestMapping(value = "/new-password/{hashCode}", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public String newPassword(@PathVariable String hashCode, @RequestBody String newPassword, HttpServletResponse httpServletResponse) throws IOException {
+    public void newPassword(@PathVariable String hashCode, @RequestBody String newPassword, HttpServletResponse httpServletResponse) throws IOException {
         System.out.println(newPassword);
         HashCode hashCodeObj = hashCodeService.findHashCode(hashCode);
         try{
             if(hashCodeObj.getType().equals("Reset") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()){
                 userInfoService.resetPassword(hashCodeObj.getUserId(), newPassword);
                 hashCodeService.deleteHashCode(hashCodeObj.getUserId());
-            }return "New password has been set";
+            }else httpServletResponse.sendError(403,"You can not change password.");
         } catch (Exception e){
-            httpServletResponse.sendError(401);
-            return "Failed to reset password";
+            httpServletResponse.sendError(500, "An Error has occured on server.");
         }
     }
 
@@ -84,5 +88,10 @@ public class UserController {
     @GetMapping("/auth")
     public void auth(){
 
+    }
+
+    @GetMapping("/getFullName")
+    public String getFullName(@RequestAttribute User user){
+        return user.getName() + " " + user.getSurname();
     }
 }

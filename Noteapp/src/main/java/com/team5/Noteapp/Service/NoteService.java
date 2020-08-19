@@ -29,7 +29,6 @@ public class NoteService {
     public List<Note> getAllNotes(Integer userId) {
         List<Note> notes = new ArrayList<Note>();
         permissionRepository.findAll().forEach(permission -> {
-            System.out.println(permission.getRole() + " - " + permission.getUserId() + " - " + userId.toString());
             if (permission.getRole().equals("read") && permission.getUserId() == userId) {
                 Optional<Note> note = noteRepository.findById(permission.getNoteId());
                 if (note.isPresent())
@@ -80,16 +79,26 @@ public class NoteService {
             permission.setNoteId(noteId);
             permission.setUserId(userInfoOptional.get().getId());
             if (role == 0) {
-                permission.setRole("read");
-                permissionRepository.save(permission);
+                Optional<Permission> permissionOptional = permissionRepository.findPermission(Integer.parseInt(userId), noteId, "read" );
+                if(!permissionOptional.isPresent()) {
+                    permission.setRole("read");
+                    permissionRepository.save(permission);
+                }
+
             }else if (role == 1) {
-                Permission permission2 = new Permission();
-                permission2.setNoteId(noteId);
-                permission2.setUserId(userInfoOptional.get().getId());
-                permission2.setRole("read");
-                permissionRepository.save(permission2);
-                permission.setRole("write");
-                permissionRepository.save(permission);
+                Optional<Permission> permissionOptional = permissionRepository.findPermission(Integer.parseInt(userId), noteId, "read" );
+                if(!permissionOptional.isPresent()) {
+                    Permission permission2 = new Permission();
+                    permission2.setNoteId(noteId);
+                    permission2.setUserId(userInfoOptional.get().getId());
+                    permission2.setRole("read");
+                    permissionRepository.save(permission2);
+                }
+                permissionOptional = permissionRepository.findPermission(Integer.parseInt(userId), noteId, "write" );
+                if(!permissionOptional.isPresent()){
+                    permission.setRole("write");
+                    permissionRepository.save(permission);
+                }
             } else throw new IllegalArgumentException();
         }
     }

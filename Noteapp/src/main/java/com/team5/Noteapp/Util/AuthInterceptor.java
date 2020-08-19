@@ -57,7 +57,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			Map<String, String> pathVariables = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 			for(String permission : annotation.permissions())
 				if(!permissionFilter.filter(user.getId(), Integer.valueOf(pathVariables.get("id")), permission)) {
-					response.setStatus(403);
+					response.sendError(403,"You have not permission for this request.");
 					return false;
 				}
 		}

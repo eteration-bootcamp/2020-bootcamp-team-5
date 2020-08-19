@@ -55,7 +55,7 @@ public class UserService {
         throw new IllegalArgumentException("Specified user does not exists!");
     }
 
-    public String login(UserInfo userInfo) throws Exception {
+    public String login(UserInfo userInfo){
         User user = this.getUserByUserInfo(userInfo.getUsername(), hashCodeService.createPasswordHash(userInfo.getPassword()));
         HashCode hashCode;
         if (user != null) {
@@ -73,7 +73,7 @@ public class UserService {
                 System.out.println(violation.getMessage());
             });
             if (!violations.isEmpty()) {
-                throw new IllegalArgumentException("XD");
+                return "Invalid phone number or email!";
             }
             user.setName(userDto.getName());
             user.setSurname(userDto.getSurname());
@@ -83,13 +83,17 @@ public class UserService {
             userInfo.setActive(false);
             userInfo.setPassword(hashCodeService.createPasswordHash(userDto.getPassword()));
             userInfo.setUser(user);
-            userInfoRepository.save(userInfo);
-            userRepository.save(user);
+            try{
+                userInfoRepository.save(userInfo);
+                userRepository.save(user);
+            }catch (Exception e){
+                return "User already exists!";
+            }
             this.sendMailForAccountActivation(userDto.getMail());
             System.out.println(userRepository.findById(user.getId()).toString());
             System.out.println(userInfoRepository.findById(userInfo.getId()).toString());
-            return "Signup successful!";
-        } else return "Signup failed!";
+        } else return "Invalid registration data!";
+    return "Signed up succesfully! Please check your mail.";
     }
 
     public void sendMailForResetPassword(String email) {
