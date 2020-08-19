@@ -8,24 +8,24 @@ import {FORGOT_PASSWORD_API} from '../../config/api';
 function ForgotPassword() {
     const dispatch = useDispatch();
     const [authResult, setAuthResult] = useState(false);
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    function grabUsername(e) {
-        setUsername(e.target.value);
+    function grabEmail(e) {
+        setEmail(e.target.value);
     }
 
     function forgotPassword(e) {
         e.preventDefault();
 
-        axios.post(FORGOT_PASSWORD_API + username)
+        axios.post(FORGOT_PASSWORD_API + email)
             .then(res => {
                 setErrorMessage("");
                 setAuthResult(true);
             })
             .catch(error => {
                 setAuthResult(false);
-                setErrorMessage("Please check your username and try again!");
+                setErrorMessage("Please check your email and try again!");
             });
     }
     
@@ -36,7 +36,7 @@ function ForgotPassword() {
                 <h2>Password Reset</h2>
                 {authResult ? (<span>Password reset link has been sent to your email.</span>) :
                 (<><Form.Group controlId="email">
-                    <Form.Control placeholder="Enter your username here" onChange={e => grabUsername(e)} />
+                    <Form.Control placeholder="Enter your email here" onChange={e => grabEmail(e)} />
                 </Form.Group>
 
                 <Button variant="dark" type="submit">
