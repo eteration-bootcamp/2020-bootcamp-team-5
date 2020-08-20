@@ -30,6 +30,12 @@ export function setDeletingStatusNoAuthory() {
     };
 };
 
+export function setDeletingStatusError() {
+    return {
+        type: "SET_DELETING_STATUS_ERROR"
+    };
+};
+
 export function setDeletingAlertBoxClosed() {
     return {
         type: "SET_DELETING_ALERT_BOX_CLOSED"

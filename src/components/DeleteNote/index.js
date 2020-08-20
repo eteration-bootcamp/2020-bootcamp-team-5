@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Alert, Modal, Spinner} from 'react-bootstrap';
-import {setAllNotes, setDeletingAlertBoxClosed} from '../../actions';
+import {setAllNotes, setDeletingAlertBoxClosed, setDeletingStatusError} from '../../actions';
 import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import {ALL_NOTES_API} from '../../config/api';
@@ -17,7 +17,7 @@ function DeleteNote(props) {
                 dispatch(setAllNotes(res.data));
             })
             .catch(error => {
-                console.error(error.response);
+                dispatch(setDeletingStatusError());
             });
     }
 

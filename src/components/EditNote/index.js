@@ -9,7 +9,7 @@ import {UPDATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
 
 function EditNote(props) {
     const note = useSelector(state => state.currentNote);
-    const [editStatus, setEditStatus] = useState('');
+    const [editStatus, setEditStatus] = useState('Edit your note!');
     const dispatch = useDispatch();
 
     function updateNote() {
@@ -27,7 +27,9 @@ function EditNote(props) {
             .then(res => {
               dispatch(setAllNotes(res.data));
             })
-            .catch(error => {});
+            .catch(error => {
+              setEditStatus("Something went wrong!");
+            });
         })
         .catch(error => {
           setEditStatus("Edit your note! Status: You have no updating authority for this note!");
@@ -76,7 +78,7 @@ function EditNote(props) {
                 <br />
                 <Form.Row>
                     <Col>
-                      <Form.Control componentClass="textarea" rows={100} style={{ height: 200 }}  size="sm" type="text" onChange={e => editContent(e)} value={note.content} />
+                      <Form.Control as="textarea" rows="100" style={{ height: 200 }}  size="sm" type="text" onChange={e => editContent(e)} value={note.content} />
                     </Col>
                 </Form.Row>
             </Form.Group>

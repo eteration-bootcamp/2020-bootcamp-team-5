@@ -29,7 +29,6 @@ function LoginForm() {
             })
             .catch(error => {
                 localStorage.setItem("fullName", "");
-                console.error(error.response);
             });
     }
 

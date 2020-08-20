@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {setAllNotes} from '../../actions';
 import {CREATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
+import '../../styles/Main.css';
 
 function AddNewNote(props) {
     const [header, setHeader] = useState('Add a new note!');
@@ -18,20 +19,20 @@ function AddNewNote(props) {
       }
 
       axios.post(CREATE_NOTE_API, noteJSON, { 'headers': { 'auth': localStorage.getItem('auth') } })
-      .then(res => {
-        axios.get(ALL_NOTES_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
-          .then(res => {
-              dispatch(setAllNotes(res.data));
-          })
-          .catch(error => {
-              console.error(error.response);
-          });
-          
-          setHeader("Your note has been added successfully! => " + noteJSON.title);
-      })
-      .catch(error => {
-          console.error(error.response);
-      });
+        .then(res => {
+          axios.get(ALL_NOTES_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
+            .then(res => {
+                dispatch(setAllNotes(res.data));
+            })
+            .catch(error => {
+              setHeader(`Something went wrong!`);
+            });
+            
+            setHeader(`Add a new note! Status: Your note (${noteJSON.title}) has been added successfully!`);
+        })
+        .catch(error => {
+          setHeader(`Something went wrong!`);
+        });
     }
 
     return (
@@ -55,8 +56,8 @@ function AddNewNote(props) {
                 </Form.Row>
                 <br />
                 <Form.Row>
-                    <Col>
-                      <Form.Control ref={contentRef} componentClass="textarea" rows={100} style={{ height: 200 }}  size="sm" type="text" placeholder="Write your note here..." />
+                    <Col >
+                      <Form.Control ref={contentRef} as="textarea" rows="100" style={{ height: 200 }}  size="sm" type="text" placeholder="Write your note here..." />
                     </Col>
                 </Form.Row>
             </Form.Group>

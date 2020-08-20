@@ -45,9 +45,7 @@ function Note(props) {
             .then(res => {
                 dispatch(setCurrentViewNote(res.data));
             })
-            .catch(error => {
-                console.error(error.response);
-            });
+            .catch(error => {});
     }
 
     function deleteNote() {
@@ -60,34 +58,43 @@ function Note(props) {
             });
     }
 
+    function preview(currentNote) {
+        if(currentNote) {
+            const len = currentNote.length;
+            return len < 40 ? (currentNote.substring(0, len) + "") : (currentNote.substring(0, 40) + "...");
+        }
+    }
+
     return (
-        <Col xs={12} sm={6} md={4} lg={4} xl={4} className="note-item-col ver-hor-center">
+        <Col xs={12} sm={6} md={4} lg={3} xl={3} className="note-item-col ver-hor-center">
             <Card>
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text>
-                        {props.content}
+                        {preview(props.content)}
                     </Card.Text>
-                    <Button variant="primary" onClick={viewButtonOnClick}><ZoomIn/></Button> {' '}
-                    <ViewNote
-                        show={viewShow}
-                        onHide={() => setViewShow(false)}
-                    />
-                    <Button variant="warning" onClick={editButtonOnClick}><PencilSquare/></Button> {' '}
-                    <EditNote
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
-                    <Button variant="danger" onClick={deleteButtonOnClick}><Trash/></Button> {' '}
-                    <DeleteNote
-                        show={deletingAlertBox}
-                    />
-                    <Button variant="info" onClick={shareButtonOnClick}><Share/></Button>
-                    <ShareNote
-                        show={shareShow}
-                        title={props.title}
-                        onHide={() => setShareShow(false)}
-                    />
+                    <div className="text-center">
+                        <Button variant="primary" onClick={viewButtonOnClick}><ZoomIn/></Button> {' '}
+                        <ViewNote
+                            show={viewShow}
+                            onHide={() => setViewShow(false)}
+                        />
+                        <Button variant="warning" onClick={editButtonOnClick}><PencilSquare/></Button> {' '}
+                        <EditNote
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                        />
+                        <Button variant="danger" onClick={deleteButtonOnClick}><Trash/></Button> {' '}
+                        <DeleteNote
+                            show={deletingAlertBox}
+                        />
+                        <Button variant="info" onClick={shareButtonOnClick}><Share/></Button>
+                        <ShareNote
+                            show={shareShow}
+                            title={props.title}
+                            onHide={() => setShareShow(false)}
+                        />
+                    </div>
                 </Card.Body>
             </Card>
         </Col>

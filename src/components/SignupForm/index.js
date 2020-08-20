@@ -54,14 +54,13 @@ function SignupForm() {
         axios.post(SIGNUP_API, userJSON)
             .then(res => {
                 dispatch(setToastTitle("Status"));
-                dispatch(setToastContent("You have successfully signed up! Please check your email adress to activate your account!"));
+                dispatch(setToastContent(res.data));
                 dispatch(showToastBox());
             })
             .catch(error => {
                 dispatch(setToastTitle("Error"));
                 dispatch(setToastContent(error.response.data));
                 dispatch(showToastBox());
-                console.error(error.response);
             });
     }
 
