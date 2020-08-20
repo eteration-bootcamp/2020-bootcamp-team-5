@@ -21,12 +21,12 @@ function WelcomePage() {
           <Col lg={2} className="d-none d-lg-block"></Col>
 
           <Col xs={12} md={6} lg={4} className="slogan-container">
-            <Row className="justify-content-center">
+            <Row className="justify-content-center tracking-in-expand">
               <h1>Noteration</h1>
             </Row>
             <Row>{<br/>}</Row>
-            <Row className="justify-content-center text-center">
-              <h2>Your digital notebook!</h2>
+            <Row className="justify-content-center text-center tracking-in-expand-two">
+              <h2>Note it, we'll remember for you!</h2>
             </Row>
           </Col>
 

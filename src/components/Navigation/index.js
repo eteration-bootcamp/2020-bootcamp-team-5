@@ -15,10 +15,12 @@ const Navigation = () => {
     axios.post(LOGOUT_API + localStorage.getItem("auth"))
       .then(res => {
         localStorage.removeItem("auth");
+        localStorage.removeItem("fullName");
         setLogoutResult(true);
       })
       .catch(error => {
         localStorage.removeItem("auth");
+        localStorage.removeItem("fullName");
         setLogoutResult(true);
       });
   }
@@ -43,7 +45,7 @@ const Navigation = () => {
             </Col>
 
             <Col xs={12} md={6} lg={5} xl={4} className="navigation-user-info">      
-              Welcome Metin Doğan Çelik,
+              Welcome {localStorage.getItem("fullName")},
               <Button variant="link" className="logout-text" onClick={logout}>Logout</Button>
             </Col>
 

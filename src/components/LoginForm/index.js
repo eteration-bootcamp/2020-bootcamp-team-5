@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import { Redirect } from "react-router-dom";
 import '../../styles/Main.css';
 import axios from 'axios';
-import {LOGIN_API} from '../../config/api';
+import {LOGIN_API, GET_FULL_NAME_API} from '../../config/api';
 import {setToastTitle, setToastContent, showToastBox} from '../../actions';
 
 function LoginForm() {
@@ -22,6 +22,17 @@ function LoginForm() {
         setPassword(e.target.value);
     }
 
+    function setFullName() {
+        axios.get(GET_FULL_NAME_API, { 'headers': { 'auth': localStorage.getItem('auth') } })
+            .then(res => {
+                localStorage.setItem("fullName", res.data);
+            })
+            .catch(error => {
+                localStorage.setItem("fullName", "");
+                console.error(error.response);
+            });
+    }
+
     function login(e) {
         e.preventDefault();
 
@@ -33,6 +44,7 @@ function LoginForm() {
         axios.post(LOGIN_API, userJSON)
             .then(res => {
                 localStorage.setItem("auth", res.data);
+                setFullName();
                 setAuthResult(true);
             })
             .catch(error => {

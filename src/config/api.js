@@ -12,3 +12,4 @@ export const AUTH_API = `${MAIN_API}/auth`;
 export const FORGOT_PASSWORD_API = `${MAIN_API}/forgot-password?email=`;
 export const NEW_PASSWORD_API = `${MAIN_API}/new-password/`;
 export const ACTIVATE_ACCOUNT_API = `${MAIN_API}/activate-account/`;
+export const GET_FULL_NAME_API = `${MAIN_API}/getFullName/`;
