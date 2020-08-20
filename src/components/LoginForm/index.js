@@ -51,7 +51,6 @@ function LoginForm() {
                 dispatch(setToastTitle("Error"));
                 dispatch(setToastContent("Invalid username or password!"));
                 dispatch(showToastBox());
-                console.error(error.response);
             });
     }
 

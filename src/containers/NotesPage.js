@@ -18,9 +18,7 @@ function NotesPage() {
             .then(res => {
                 dispatch(setAllNotes(res.data));
             })
-            .catch(error => {
-                console.error(error.response);
-            });
+            .catch(error => {});
     },[]);
 
     return (

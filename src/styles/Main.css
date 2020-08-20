@@ -314,5 +314,6 @@ body {
 @media only screen and (min-width: 768px) { 
     .login-responsive {
         padding-left: 0px;
+        padding-right: 0px;
     }
 }
