@@ -77,7 +77,7 @@ public class NoteService {
         if (userInfoOptional.isPresent()) {
             Permission permission = new Permission();
             permission.setNoteId(noteId);
-            permission.setUserId(userInfoOptional.get().getId());
+            permission.setUserId(userInfoOptional.get().getUser().getId());
             if (role == 0) {
                 Optional<Permission> permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getId(), noteId, "read");
                 if (!permissionOptional.isPresent()) {
@@ -89,7 +89,7 @@ public class NoteService {
                 if (!permissionOptional.isPresent()) {
                     Permission permission2 = new Permission();
                     permission2.setNoteId(noteId);
-                    permission2.setUserId(userInfoOptional.get().getId());
+                    permission2.setUserId(userInfoOptional.get().getUser().getId());
                     permission2.setRole("read");
                     permissionRepository.save(permission2);
                 }
