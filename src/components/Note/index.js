@@ -8,16 +8,16 @@ import ShareNote from '../ShareNote';
 import ViewNote from '../ViewNote';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
-import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxOpen, setDeletingStatusNoAuthory} from '../../actions';
+import {setCurrentViewNote, setDeletingStatusDeleted, setDeletingAlertBoxOpen, setDeletingStatusNoAuthory, setEditNoteBoxOpen} from '../../actions';
 import {READ_NOTE_API, DELETE_NOTE_API} from '../../config/api';
 
 function Note(props) {
-    const [modalShow, setModalShow] = useState(false);
     const [shareShow, setShareShow] = useState(false);
     const [viewShow, setViewShow] = useState(false);
     
     const dispatch = useDispatch();
     const deletingAlertBox = useSelector(state => state.deletingAlertBox);
+    const editNoteBox = useSelector(state => state.editNoteBox);
 
     function viewButtonOnClick() {
         viewNote();
@@ -26,7 +26,7 @@ function Note(props) {
 
     function editButtonOnClick() {
         viewNote();
-        setModalShow(true);
+        dispatch(setEditNoteBoxOpen());
     }
 
     function deleteButtonOnClick() {
@@ -81,8 +81,7 @@ function Note(props) {
                         />
                         <Button variant="warning" onClick={editButtonOnClick}><PencilSquare/></Button> {' '}
                         <EditNote
-                            show={modalShow}
-                            onHide={() => setModalShow(false)}
+                            show={editNoteBox}
                         />
                         <Button variant="danger" onClick={deleteButtonOnClick}><Trash/></Button> {' '}
                         <DeleteNote

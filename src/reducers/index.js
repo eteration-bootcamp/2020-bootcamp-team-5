@@ -6,6 +6,8 @@ import deletingAlertBox from './deletingAlertBox';
 import showToast from './showToast';
 import toastContent from './toastContent';
 import toastTitle from './toastTitle';
+import addNoteBox from './addNoteBox';
+import editNoteBox from './editNoteBox';
 import {combineReducers} from 'redux';
 
 const reducer = combineReducers({
@@ -16,7 +18,9 @@ const reducer = combineReducers({
     deletingAlertBox,
     showToast,
     toastContent,
-    toastTitle
+    toastTitle,
+    addNoteBox,
+    editNoteBox
 });
 
 export default reducer;

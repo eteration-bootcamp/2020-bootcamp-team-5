@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import {Button, Modal, Form, Col} from 'react-bootstrap';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
-import {setAllNotes} from '../../actions';
+import {setAllNotes, setAddNoteBoxClosed} from '../../actions';
 import {CREATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
 import '../../styles/Main.css';
 
@@ -11,6 +11,11 @@ function AddNewNote(props) {
     const titleRef = useRef(null);
     const contentRef = useRef(null);
     const dispatch = useDispatch();
+
+    function closeButtonOnClick() {
+      dispatch(setAddNoteBoxClosed());
+      setHeader("Add a new note!");
+    }
     
     function addNote() {
       const noteJSON = {
@@ -64,7 +69,7 @@ function AddNewNote(props) {
         </Modal.Body>
         <Modal.Footer>
             <Button onClick={addNote}>Submit</Button>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={closeButtonOnClick}>Close</Button>
         </Modal.Footer>
       </Modal>
     );

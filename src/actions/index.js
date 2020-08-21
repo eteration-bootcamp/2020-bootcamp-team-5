@@ -48,6 +48,30 @@ export function setDeletingAlertBoxOpen() {
     };
 };
 
+export function setEditNoteBoxClosed() {
+    return {
+        type: "SET_EDIT_NOTE_BOX_CLOSED"
+    };
+};
+
+export function setEditNoteBoxOpen() {
+    return {
+        type: "SET_EDIT_NOTE_BOX_OPEN"
+    };
+};
+
+export function setAddNoteBoxClosed() {
+    return {
+        type: "SET_ADD_NOTE_BOX_CLOSED"
+    };
+};
+
+export function setAddNoteBoxOpen() {
+    return {
+        type: "SET_ADD_NOTE_BOX_OPEN"
+    };
+};
+
 export function showToastBox() {
     return {
         type: "SHOW_TOAST_BOX"

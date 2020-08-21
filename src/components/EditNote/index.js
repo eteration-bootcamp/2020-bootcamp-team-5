@@ -4,13 +4,18 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
 import {setAllNotes} from '../../actions';
-import {setCurrentViewNote} from '../../actions';
+import {setCurrentViewNote, setEditNoteBoxClosed} from '../../actions';
 import {UPDATE_NOTE_API, ALL_NOTES_API} from '../../config/api';
 
 function EditNote(props) {
     const note = useSelector(state => state.currentNote);
     const [editStatus, setEditStatus] = useState('Edit your note!');
     const dispatch = useDispatch();
+
+    function closeButtonOnClick() {
+      dispatch(setEditNoteBoxClosed());
+      setEditStatus("Edit your note!");
+    }
 
     function updateNote() {
       const noteJSON = {
@@ -85,7 +90,7 @@ function EditNote(props) {
         </Modal.Body>
         <Modal.Footer>
             <Button onClick={() => updateNote({note})}>Update</Button>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={closeButtonOnClick}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
