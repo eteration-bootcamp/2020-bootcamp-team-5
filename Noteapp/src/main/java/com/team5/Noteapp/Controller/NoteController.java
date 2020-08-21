@@ -40,7 +40,7 @@ public class NoteController {
         noteService.editNote(note, id);
     }
 
-    @AddPermissionFilter(permissions = {"write", "read"})
+    @AddPermissionFilter(permissions = {"owner"})
     @DeleteMapping("/delete/{id}")
     public void deleteNote(@PathVariable Integer id) {
         noteService.deleteNote(id);

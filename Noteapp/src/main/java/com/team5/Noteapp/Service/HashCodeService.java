@@ -17,14 +17,19 @@ public class HashCodeService {
     @Autowired
     private HashCodeRepository hashCodeRepository;
 
-    public HashCode createLoginHash(User user) {
-        hashCodeRepository.deleteHashCode(user.getId());
+    public String createHashCode(User user, String type){
         HashCode hashCode = new HashCode();
+        hashCode.setType(type);
         long dateMillis = System.currentTimeMillis();
         hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
         hashCode.setUserId(user.getId());
         hashCode.setExDate(new Date(dateMillis + 7200000));
-        return hashCodeRepository.save(hashCode);
+        return hashCodeRepository.save(hashCode).getCode();
+    }
+
+    public String createLoginHash(User user) {
+        hashCodeRepository.deleteHashCode(user.getId());
+        return createHashCode(user, "Login");
     }
 
     public void deleteLoginHash(String hashCode) {
@@ -36,23 +41,11 @@ public class HashCodeService {
     }
 
     public String createActivationHash(User user) {
-        HashCode hashCode = new HashCode();
-        hashCode.setType("Activation");
-        long dateMillis = System.currentTimeMillis();
-        hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
-        hashCode.setUserId(user.getId());
-        hashCode.setExDate(new Date(dateMillis + 72000000));
-        return hashCodeRepository.save(hashCode).getCode();
+        return createHashCode(user, "Activation");
     }
 
     public String createResetPasswordHash(User user) {
-        HashCode hashCode = new HashCode();
-        hashCode.setType("Reset");
-        long dateMillis = System.currentTimeMillis();
-        hashCode.setCode(Hashing.sha256().hashString(dateMillis + user.getMail(), StandardCharsets.UTF_8).toString());
-        hashCode.setUserId(user.getId());
-        hashCode.setExDate(new Date(dateMillis + 72000000));
-        return hashCodeRepository.save(hashCode).getCode();
+        return createHashCode(user, "Reset");
     }
 
     public HashCode findHashCode(String hashCode){
@@ -62,6 +55,7 @@ public class HashCodeService {
         else throw new IllegalArgumentException("Hashcode not found");
     }
 
+    //TODO
     public Optional<HashCode> getLoginHash(String code) {
         return hashCodeRepository.findByHashCode(code);
     }

@@ -8,7 +8,6 @@ import com.team5.Noteapp.Service.HashCodeService;
 import com.team5.Noteapp.Service.UserInfoService;
 import com.team5.Noteapp.Service.UserService;
 
-import org.apache.catalina.filters.ExpiresFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,7 @@ public class UserController {
     private UserInfoService userInfoService;
 
     @PostMapping("/login")
-    public String login(@RequestBody UserInfo userInfo) throws Exception {
+    public String login(@RequestBody UserInfo userInfo){
         return userService.login(userInfo);
     }
 
@@ -41,57 +40,57 @@ public class UserController {
     }
 
     @PostMapping(value = "/signup")
-    public void signup(@RequestBody UserDto userDto, HttpServletResponse httpServletResponse) throws IOException {
+    public String signup(@RequestBody UserDto userDto, HttpServletResponse httpServletResponse) throws IOException {
         try {
-            userService.signup(userDto);
+            return userService.signup(userDto);
         }catch (Exception e){
-            httpServletResponse.sendError(401, "JUNG DIFF");
-        }
+            httpServletResponse.sendError(401, "User already exists!");
+        }return null;
     }
 
     @PostMapping(value = "/forgot-password")
-    public void forgotPassword(@RequestParam String email, HttpServletResponse  httpServletResponse) throws IOException {
-        try{
+    public void forgotPassword(@RequestParam String email, HttpServletResponse httpServletResponse) throws IOException {
+        try {
             userService.sendMailForResetPassword(email);
-        }catch (Exception e){
-            httpServletResponse.sendError(401, e.getStackTrace().toString());
+        } catch (Exception e) {
+            httpServletResponse.sendError(401, "Your email is not registered!");
         }
     }
 
     @RequestMapping(value = "/new-password/{hashCode}", consumes = MediaType.TEXT_PLAIN_VALUE)
     public void newPassword(@PathVariable String hashCode, @RequestBody String newPassword, HttpServletResponse httpServletResponse) throws IOException {
-        System.out.println(newPassword);
         HashCode hashCodeObj = hashCodeService.findHashCode(hashCode);
-        try{
-            if(hashCodeObj.getType().equals("Reset") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()){
+        try {
+            if (hashCodeObj.getType().equals("Reset") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()) {
                 userInfoService.resetPassword(hashCodeObj.getUserId(), newPassword);
                 hashCodeService.deleteHashCode(hashCodeObj.getUserId());
-            }else httpServletResponse.sendError(403,"You can not change password.");
-        } catch (Exception e){
-            httpServletResponse.sendError(500, "An Error has occured on server.");
+            } else httpServletResponse.sendError(403, "You can not change password.");
+        } catch (Exception e) {
+            httpServletResponse.sendError(500, "An error has occured on the server.");
         }
     }
 
     @PostMapping("/activate-account/{hashCode}")
     public String activateAccount(@PathVariable String hashCode, HttpServletResponse httpServletResponse) throws IOException {
         HashCode hashCodeObj = hashCodeService.findHashCode(hashCode);
-        try{
-            if (hashCodeObj.getType().equals("Activation") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()){
+        try {
+            if (hashCodeObj.getType().equals("Activation") && hashCodeObj.getExDate().getTime() > System.currentTimeMillis()) {
                 userInfoService.activateAccount(hashCodeObj.getUserId());
-            }return "Your account has been activated";
-        }catch (Exception e){
+            }
+            return "Your account has been activated";
+        } catch (Exception e) {
             httpServletResponse.sendError(401);
             return "Couldn't activate your account";
         }
     }
 
     @GetMapping("/auth")
-    public void auth(){
+    public void auth() {
 
     }
 
     @GetMapping("/getFullName")
-    public String getFullName(@RequestAttribute User user){
+    public String getFullName(@RequestAttribute User user) {
         return user.getName() + " " + user.getSurname();
     }
 }
