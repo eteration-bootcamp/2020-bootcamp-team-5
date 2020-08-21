@@ -4,7 +4,6 @@ import com.team5.Noteapp.Validator.Email;
 import com.team5.Noteapp.Validator.PhoneNumber;
 import lombok.Data;
 
-
 @Data
 public class UserDto {
 

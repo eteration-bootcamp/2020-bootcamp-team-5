@@ -5,7 +5,6 @@ import javax.persistence.*;
 import com.team5.Noteapp.Validator.Email;
 import com.team5.Noteapp.Validator.PhoneNumber;
 import lombok.Data;
-import org.checkerframework.common.aliasing.qual.Unique;
 
 @Entity
 @Data
@@ -22,11 +21,11 @@ public class User {
     private String surname;
 
     @PhoneNumber
-    @Unique
+    @Column(unique = true)
     private String phoneNumber;
 
     @Email
-    @Unique
+    @Column(unique = true)
     private String mail;
 
     @Override

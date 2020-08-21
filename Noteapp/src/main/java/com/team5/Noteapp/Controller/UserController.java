@@ -40,12 +40,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/signup")
-    public String signup(@RequestBody UserDto userDto, HttpServletResponse httpServletResponse) throws IOException {
+    public String signup(@RequestBody UserDto userDto, HttpServletResponse httpServletResponse){
         try {
             return userService.signup(userDto);
         }catch (Exception e){
-            httpServletResponse.sendError(401, "User already exists!");
-        }return null;
+            httpServletResponse.setStatus(400);
+            return "User Already Exist!";
+        }
     }
 
     @PostMapping(value = "/forgot-password")

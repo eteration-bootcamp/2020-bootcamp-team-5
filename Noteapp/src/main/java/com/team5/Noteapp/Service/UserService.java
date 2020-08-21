@@ -1,7 +1,6 @@
 package com.team5.Noteapp.Service;
 
 import com.team5.Noteapp.Dto.UserDto;
-import com.team5.Noteapp.Entity.HashCode;
 import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Entity.UserInfo;
 import com.team5.Noteapp.Repository.UserInfoRepository;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.mail.Message;
-import javax.mail.internet.MimeMessage;
 import javax.validation.ConstraintViolation;
 import java.util.Optional;
 import java.util.Set;
@@ -71,8 +68,10 @@ public class UserService {
         if (userDto != null) {
             Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
             violations.forEach(violation -> {
-                stringBuilder.append(violation.getMessage() + "");
+                stringBuilder.append(violation.getMessage() + "\n");
             });
+            if(stringBuilder.length() >= 2)
+                stringBuilder.setLength(stringBuilder.length() - 1);
             if (!violations.isEmpty()) {
                 return stringBuilder.toString();
             }
@@ -88,7 +87,7 @@ public class UserService {
                 userInfoRepository.save(userInfo);
                 userRepository.save(user);
             } catch (Exception e) {
-                return "User already exists!";
+                throw new IllegalArgumentException("User already exists!");
             }
             this.sendMailForAccountActivation(userDto.getMail());
         } else return "Invalid registration data!";
