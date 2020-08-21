@@ -41,10 +41,12 @@ public class HashCodeService {
     }
 
     public String createActivationHash(User user) {
+        hashCodeRepository.deleteHashCode(user.getId());
         return createHashCode(user, "Activation");
     }
 
     public String createResetPasswordHash(User user) {
+        hashCodeRepository.deleteHashCode(user.getId());
         return createHashCode(user, "Reset");
     }
 
