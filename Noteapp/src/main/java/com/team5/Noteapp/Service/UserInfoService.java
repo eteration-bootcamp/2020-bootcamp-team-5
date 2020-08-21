@@ -21,6 +21,7 @@ public class UserInfoService {
 		if (userInfoOptional.isPresent()){
 			userInfoOptional.get().setPassword(hashCodeService.createPasswordHash(newPassword));
 			userInfoRepository.save(userInfoOptional.get());
+			hashCodeService.deleteHashCode(userId);
 		}else throw new IllegalArgumentException("Password could not be updated");
 	}
 
@@ -29,6 +30,7 @@ public class UserInfoService {
 		if (userInfoOptional.isPresent()){
 			userInfoOptional.get().setActive(true);
 			userInfoRepository.save(userInfoOptional.get());
+			hashCodeService.deleteHashCode(userId);
 		}else throw new IllegalArgumentException("Failed to activate account");
 	}
 }
