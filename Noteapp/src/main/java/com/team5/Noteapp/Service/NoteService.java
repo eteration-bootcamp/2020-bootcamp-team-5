@@ -79,13 +79,13 @@ public class NoteService {
             permission.setNoteId(noteId);
             permission.setUserId(userInfoOptional.get().getUser().getId());
             if (role == 0) {
-                Optional<Permission> permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getId(), noteId, "read");
+                Optional<Permission> permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getUser().getId(), noteId, "read");
                 if (!permissionOptional.isPresent()) {
                     permission.setRole("read");
                     permissionRepository.save(permission);
                 }
             } else if (role == 1) {
-                Optional<Permission> permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getId(), noteId, "read");
+                Optional<Permission> permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getUser().getId(), noteId, "read");
                 if (!permissionOptional.isPresent()) {
                     Permission permission2 = new Permission();
                     permission2.setNoteId(noteId);
@@ -93,12 +93,12 @@ public class NoteService {
                     permission2.setRole("read");
                     permissionRepository.save(permission2);
                 }
-                permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getId(), noteId, "write");
+                permissionOptional = permissionRepository.findPermission(userInfoOptional.get().getUser().getId(), noteId, "write");
                 if (!permissionOptional.isPresent()) {
                     permission.setRole("write");
                     permissionRepository.save(permission);
                 }
-            } else throw new IllegalArgumentException();
+            } else throw new IllegalArgumentException("Username not found");
         }
     }
 }

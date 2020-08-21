@@ -10,6 +10,8 @@ import com.team5.Noteapp.Entity.User;
 import com.team5.Noteapp.Filter.AddPermissionFilter;
 import com.team5.Noteapp.Service.NoteService;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RequestMapping("/notes")
 @RestController
 @CrossOrigin
@@ -48,7 +50,11 @@ public class NoteController {
 
     @AddPermissionFilter(permissions = {"owner"})
     @PostMapping("/share/{id}/{userName}/{role}")
-    public void shareNote(@PathVariable int id, @PathVariable String userName, @PathVariable int role) {
-        noteService.shareNote(id, userName, role);
+    public void shareNote(@PathVariable int id, @PathVariable String userName, @PathVariable int role, HttpServletResponse httpServletResponse) {
+        try{
+            noteService.shareNote(id, userName, role);
+        }catch (Exception e){
+            httpServletResponse.setStatus(400);
+        }
     }
 }
