@@ -1,5 +1,6 @@
 package com.team5.Noteapp.Entity;
 
+import com.team5.Noteapp.Validator.Password;
 import lombok.Data;
 
 import javax.persistence.*;

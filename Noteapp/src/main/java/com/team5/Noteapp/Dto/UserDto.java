@@ -1,6 +1,7 @@
 package com.team5.Noteapp.Dto;
 
 import com.team5.Noteapp.Validator.Email;
+import com.team5.Noteapp.Validator.Password;
 import com.team5.Noteapp.Validator.PhoneNumber;
 import lombok.Data;
 
@@ -19,7 +20,6 @@ public class UserDto {
 
     private String username;
 
+    @Password
     private String password;
-
-
 }
