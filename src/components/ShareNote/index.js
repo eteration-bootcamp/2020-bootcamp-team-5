@@ -19,7 +19,7 @@ function ShareNote(props) {
           setHeader(`Share your note! Status: Your note (${note.title}) has been shared successfully!`);
         })
         .catch(error => {
-          setHeader("Share your note! Status: You have no sharing authority for this note!");
+          setHeader("Share your note! Status: You have no sharing authority for this note or username not found!");
         });
     }
 
