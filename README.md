@@ -16,7 +16,7 @@ Noteration is a notebook application that you can create and share your personal
 ![alt text](http://metindogancelik.com/noteration_docs/noteration-logo.png)
 
 ![alt text](http://metindogancelik.com/noteration_docs/noteration-demo.png)
-* Demo: [Noteration Website](http://noteration.azurewebsites.com/)
+* Demo: [Noteration Website](http://noteration.azurewebsites.net/)
 * **Note it, we'll  remember it for you!**
 
 ### Installation: Frontend
@@ -42,7 +42,7 @@ $ npm run build
 ### Installation: Backend
 
 ```sh
-$ cd Backend
+$ cd Noteapp
 $ mvn build
 ```
 
